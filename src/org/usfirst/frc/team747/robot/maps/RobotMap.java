@@ -31,7 +31,7 @@ public final class RobotMap {
         }
     }
 	/**
-	 * The gear mech will use x talons to operate the mechanism
+	 * The gear mech will use 2 talons to operate the mechanism, one for the intake, and another for the PID joint
 	 */
     public enum GearMech {
 
