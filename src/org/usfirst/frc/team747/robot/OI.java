@@ -19,7 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
 	//// CREATING BUTTONS
 	 public static final Joystick 
-		JOYSTICK_DRIVER_LEFT = new Joystick(DriverStation.Controller.DRIVER_LEFT.getValue()),
+	 //Joysticks control both climb and drive
+		JOYSTICK_DRIVER_LEFT= new Joystick(DriverStation.Controller.DRIVER_LEFT.getValue()),
 		JOYSTICK_DRIVER_RIGHT = new Joystick(DriverStation.Controller.DRIVER_RIGHT.getValue()),
 		CONTROLLER_OPERATOR = new Joystick(DriverStation.Controller.OPERATOR.getValue());
 	 
@@ -40,11 +41,12 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenPressed(new ExampleCommand());
 
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
+	public OI() {
+		BUTTON_INTAKE.whileHeld(new GrabGearCommand());
+		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
+		
+		
+	}
 
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
+	
 }
