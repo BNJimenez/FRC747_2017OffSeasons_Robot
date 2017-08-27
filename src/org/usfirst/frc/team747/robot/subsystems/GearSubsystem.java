@@ -8,6 +8,7 @@ import org.usfirst.frc.team747.robot.commands.GearDoNothing;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -23,6 +24,7 @@ public class GearSubsystem extends Subsystem {
     
 
 	private double speed = 1.0;
+	private int loops = 1;
 	private double P = 0;
 	private double I = 0;
 	private double D = 0;
@@ -36,15 +38,13 @@ public class GearSubsystem extends Subsystem {
 		talonGear1.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		talonGear2.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
+		talonGear2.changeControlMode(TalonControlMode.Position);
 		talonGear2.configNominalOutputVoltage(MIN_VOLTAGE, -1*MIN_VOLTAGE);
 		talonGear2.configPeakOutputVoltage(MAX_VOLTAGE, -1*MAX_VOLTAGE);
 		
 		talonGear2.setAllowableClosedLoopErr(0);
 		
-		talonGear2.setP(P);
-		talonGear2.setI(I);
-		talonGear2.setD(D);
-		talonGear2.setF(F);
+		talonGear2.setPID(P, I, D);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -55,7 +55,7 @@ public class GearSubsystem extends Subsystem {
     	//activate the rollers
     	talonGear1.set(1*speed);
     	//activate the PID controlled mechanism
-    	
+    	talonGear2.set(loops);
     	
     }
     public void SpitOutGear() {
