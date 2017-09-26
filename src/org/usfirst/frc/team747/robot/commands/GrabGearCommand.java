@@ -1,24 +1,22 @@
+
 package org.usfirst.frc.team747.robot.commands;
 
-import org.usfirst.frc.team747.robot.OI;
 import org.usfirst.frc.team747.robot.Robot;
-import org.usfirst.frc.team747.robot.maps.DriverStation;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class GrabGearCommand extends Command {
 	
-			
+
+	private double P = .1;
+	private double I = .1;
+	private double D = .1;
+	
     public GrabGearCommand() {
         requires(Robot.GEAR_MECH);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	super.initialize();
+		Robot.GEAR_MECH.talonGear2.setP(P);
+		Robot.GEAR_MECH.talonGear2.setI(I);
+		Robot.GEAR_MECH.talonGear2.setD(D);
     }
 
     // Called repeatedly when this Command is scheduled to run

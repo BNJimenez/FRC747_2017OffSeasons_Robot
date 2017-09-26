@@ -35,8 +35,8 @@ public final class RobotMap {
 	 */
     public enum GearMech {
 
-    	GEARMECH_1(6),
-    	GEARMECH_2(7);
+//    	GEARMECH_1(6),
+    	GEARMECH_2(8);
  
     	private int value;
     	

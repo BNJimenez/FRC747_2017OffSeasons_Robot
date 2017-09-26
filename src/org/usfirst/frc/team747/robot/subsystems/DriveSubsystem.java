@@ -55,12 +55,18 @@ public class DriveSubsystem extends Subsystem {
         this.talonDriveRightMid.setInverted(false);
         this.talonDriveRightBack.setInverted(false);
         
-        this.talonDriveLeftPrimary.reverseSensor(false);
-        this.talonDriveRightPrimary.reverseSensor(true);     
-
+        this.talonDriveLeftPrimary.reverseSensor(true);
+        this.talonDriveRightPrimary.reverseSensor(false);    
+        
+//        this.talonDriveLeftMid.reverseSensor(true);
+//        this.talonDriveRightMid.reverseSensor(false);     
+//        
+//        this.talonDriveLeftBack.reverseSensor(true);
+//        this.talonDriveRightBack.reverseSensor(false);     
+       
         this.talonDriveLeftMid.changeControlMode(CANTalon.TalonControlMode.Follower);
         this.talonDriveLeftMid.set(this.talonDriveLeftPrimary.getDeviceID());
-        
+       
         this.talonDriveLeftBack.changeControlMode(CANTalon.TalonControlMode.Follower);
         this.talonDriveLeftBack.set(this.talonDriveLeftPrimary.getDeviceID());
         
@@ -70,25 +76,66 @@ public class DriveSubsystem extends Subsystem {
         this.talonDriveRightBack.changeControlMode(CANTalon.TalonControlMode.Follower);
         this.talonDriveRightBack.set(this.talonDriveRightPrimary.getDeviceID());
         
-        talonDriveLeftPrimary.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-        talonDriveRightPrimary.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+//        talonDriveLeftPrimary.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+//        talonDriveRightPrimary.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
         
-        talonDriveLeftPrimary.configEncoderCodesPerRev((int) ENCODER_TICKS);
-        talonDriveRightPrimary.configEncoderCodesPerRev((int) ENCODER_TICKS);
+//        talonDriveLeftPrimary.configEncoderCodesPerRev((int) ENCODER_TICKS);
+//        talonDriveRightPrimary.configEncoderCodesPerRev((int) ENCODER_TICKS);
+
+//        talonDriveLeftMid.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+//        talonDriveRightMid.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+//        
+//        talonDriveLeftMid.configEncoderCodesPerRev((int) ENCODER_TICKS);
+//        talonDriveRightMid.configEncoderCodesPerRev((int) ENCODER_TICKS);
+        
+        
+//        talonDriveLeftBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+//        talonDriveRightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+//        
+//        talonDriveLeftBack.configEncoderCodesPerRev((int) ENCODER_TICKS);
+//        talonDriveRightBack.configEncoderCodesPerRev((int) ENCODER_TICKS);
+        
+        this.talonDriveLeftPrimary.reverseOutput(true);
+        this.talonDriveRightPrimary.reverseOutput(false);
+       
+//        this.talonDriveLeftMid.reverseOutput(true);
+//        this.talonDriveRightMid.reverseOutput(false);
+       
+//        this.talonDriveLeftBack.reverseOutput(true);
+//        this.talonDriveRightBack.reverseOutput(false);
     }
     public void initDefaultCommand() {
         this.setDefaultCommand(new DriveCommand());
     }
     public void set(double left, double right) {
+    	
+    	System.out.println("Left: "+left+" Right: "+right);
+    	
         this.talonDriveLeftPrimary.set(left);
         this.talonDriveRightPrimary.set(right);
+        
+        System.out.println("---VALUE--- Left: "+talonDriveLeftPrimary.get() + " Right: "+ talonDriveRightPrimary.get());
+       
+//        this.talonDriveLeftMid.set(left);
+//        this.talonDriveRightMid.set(right);
+       
+//        this.talonDriveLeftBack.set(left);
+//        this.talonDriveRightBack.set(right);
+        
     }
     
     public void changeControlMode(TalonControlMode mode) {
         this.talonDriveLeftPrimary.changeControlMode(mode);
         this.talonDriveRightPrimary.changeControlMode(mode);
+//        
+//        this.talonDriveLeftMid.changeControlMode(mode);
+//        this.talonDriveRightMid.changeControlMode(mode);
+      
+//        this.talonDriveLeftBack.changeControlMode(mode);
+//        this.talonDriveRightBack.changeControlMode(mode);
     }
     public void stop() {
+    }/*
         TalonControlMode mode = this.talonDriveLeftPrimary.getControlMode();
 
         double left = 0;
@@ -98,6 +145,10 @@ public class DriveSubsystem extends Subsystem {
         case Position:
             left = this.talonDriveLeftPrimary.getPosition();
             right = this.talonDriveRightPrimary.getPosition();
+//            left = this.talonDriveLeftMid.getPosition();
+//            right = this.talonDriveRightMid.getPosition();
+//            left = this.talonDriveLeftBack.getPosition();
+//            right = this.talonDriveRightBack.getPosition();
             break;
         case PercentVbus:
         case Speed:
@@ -108,6 +159,6 @@ public class DriveSubsystem extends Subsystem {
         }
         
         this.set(left, right);
-    }
+    }*/
 }
 

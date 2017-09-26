@@ -19,6 +19,7 @@ public class SpitOutGearCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.GEAR_MECH.SpitOutGear();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -28,10 +29,12 @@ public class SpitOutGearCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.GEAR_MECH.DoNothing();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

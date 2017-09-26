@@ -25,9 +25,9 @@ public class OI {
 		CONTROLLER_OPERATOR = new Joystick(DriverStation.Controller.OPERATOR.getValue());
 	 
 	 public static final JoystickButton
-	 	BUTTON_INTAKE 
+	 	BUTTON_GEAR_INTAKE 
 	 		= new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_LB.getValue()),
-	 	BUTTON_GEAR_DEPLOY 
+	 	BUTTON_GEAR_DEPLOY
 	 		= new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_RB.getValue());
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
@@ -42,7 +42,7 @@ public class OI {
 	// button.whenPressed(new ExampleCommand());
 
 	public OI() {
-		BUTTON_INTAKE.whileHeld(new GrabGearCommand());
+		BUTTON_GEAR_INTAKE.whileHeld(new GrabGearCommand());
 		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
 		
 		
