@@ -20,12 +20,14 @@ import org.usfirst.frc.team747.robot.subsystems.GearSubsystem;
 //import java.io.IOException;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-//import edu.wpi.first.wpilibj.vision.VisionThread
 
+import com.ctre.CANTalon.TalonControlMode;
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -44,17 +46,31 @@ public class Robot extends IterativeRobot {
     
     public static OI oi = null;
 
+    private static final AHRS NAV_X = new AHRS (SPI.Port.kMXP);
+    
+    public static double getNavXAngle() {
+    	return NAV_X.getYaw();
+    }
+    
+    public static double getNavXAngleRadians() {
+    	return Math.toRadians(getNavXAngle());
+    }
+    
+    public static void resetNavXAngle() {
+    	NAV_X.zeroYaw();
+    }
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		
+        resetNavXAngle();
+        DRIVE_TRAIN.changeControlMode(TalonControlMode.PercentVbus);
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -108,6 +124,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		resetNavXAngle();
+		Robot.DRIVE_TRAIN.resetBothEncoders();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

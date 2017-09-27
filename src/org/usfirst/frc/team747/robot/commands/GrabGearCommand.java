@@ -8,15 +8,23 @@ import edu.wpi.first.wpilibj.command.Command;
 public class GrabGearCommand extends Command {
 	
 
-	private double P = .1;
-	private double I = .1;
-	private double D = .1;
+	private double mechRevolutions;
+	private double gearP;
+	private double gearI;
+	private double gearD;
 	
-    public GrabGearCommand() {
+	private final static double ENCODER_COMPENSATION_VALUE = 1;
+
+    private static final double MAX_VOLTAGE = 12;
+    private static final double MIN_VOLTAGE = 1.9;
+	
+    public GrabGearCommand(double revolutions, double P, double I, double D) {
         requires(Robot.GEAR_MECH);
-		Robot.GEAR_MECH.talonGear2.setP(P);
-		Robot.GEAR_MECH.talonGear2.setI(I);
-		Robot.GEAR_MECH.talonGear2.setD(D);
+        this.gearP = P;
+        this.gearI = I;
+        this.gearD = D;
+        
+
     }
 
     // Called repeatedly when this Command is scheduled to run

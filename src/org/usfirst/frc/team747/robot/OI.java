@@ -42,7 +42,7 @@ public class OI {
 	// button.whenPressed(new ExampleCommand());
 
 	public OI() {
-		BUTTON_GEAR_INTAKE.whileHeld(new GrabGearCommand());
+//		BUTTON_GEAR_INTAKE.whileHeld(new GrabGearCommand());
 		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
 		
 		

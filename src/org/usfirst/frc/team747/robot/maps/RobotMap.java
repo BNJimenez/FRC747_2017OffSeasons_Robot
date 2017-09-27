@@ -13,12 +13,17 @@ public final class RobotMap {
  
 	public enum DriveTrain {
 		
-        LEFT_FRONT(0),
-        LEFT_MIDDLE(1),
-        LEFT_REAR(2),
-        RIGHT_FRONT(3),
-        RIGHT_MIDDLE(4),
-        RIGHT_REAR(5);
+//        LEFT_FRONT(0),
+//        LEFT_MIDDLE(1),
+//        LEFT_REAR(2),
+//        RIGHT_FRONT(3),
+//        RIGHT_MIDDLE(4),
+//        RIGHT_REAR(5);
+		
+		LEFT_FRONT(0),
+		LEFT_REAR(1),
+		RIGHT_FRONT(2),
+		RIGHT_REAR(3);
 
         private int value;
 
