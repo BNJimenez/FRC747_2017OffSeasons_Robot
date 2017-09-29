@@ -7,6 +7,8 @@ import java.io.FileWriter;
 
 import org.usfirst.frc.team747.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team747.robot.subsystems.GearSubsystem;
+import org.usfirst.frc.team747.robot.vision.Target;
+import org.usfirst.frc.team747.robot.vision.VisionTracking;
 
 //import java.util.HashMap;
 
@@ -149,4 +151,11 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
+	public static double getCVAngle(VisionTracking visionTracking, String targetId) {
+        Target target = visionTracking.getTarget(targetId);
+        if (target != null) {
+            return target.getAngleDegrees();
+        }
+        return -1;
+    }
 }

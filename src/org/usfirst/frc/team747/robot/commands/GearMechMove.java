@@ -3,35 +3,38 @@ package org.usfirst.frc.team747.robot.commands;
 
 import org.usfirst.frc.team747.robot.Robot;
 
+import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class GrabGearCommand extends Command {
+public class GearMechMove extends Command {
 	
 
-	private double mechRevolutions;
+    
+	private double rotationAmount;
 	private double gearP;
 	private double gearI;
 	private double gearD;
 	
+	
 	private final static double ENCODER_COMPENSATION_VALUE = 1;
 
-    private static final double MAX_VOLTAGE = 12;
-    private static final double MIN_VOLTAGE = 1.9;
+    private static final double MAX_VOLTAGE = 1;
+    private static final double MIN_VOLTAGE = 0;
+    
+	public GearMechMove(double rotations, double P, double I, double D) {
+	    requires(Robot.GEAR_MECH);
+	      
+	    this.rotationAmount = rotations / ENCODER_COMPENSATION_VALUE;
+		this.gearP = P;
+		this.gearI = I;
+		this.gearD = D;
+	}
 	
-    public GrabGearCommand(double revolutions, double P, double I, double D) {
-        requires(Robot.GEAR_MECH);
-        this.gearP = P;
-        this.gearI = I;
-        this.gearD = D;
-        
-
+    protected void initialize() {
+    	Robot.GEAR_MECH.enablePositionControl();
     }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.GEAR_MECH.GrabGear();
-    }
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
@@ -39,6 +42,7 @@ public class GrabGearCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.GEAR_MECH.getMechPosition();
     	Robot.GEAR_MECH.DoNothing();
     }
 
