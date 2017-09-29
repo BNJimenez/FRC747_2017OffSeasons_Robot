@@ -52,10 +52,10 @@ public class GearSubsystem extends Subsystem {
     public void enablePositionControl() {
     	talonGear2.changeControlMode(TalonControlMode.Position);
     }
-    public void getMechPosition() {
+    public int getMechPosition() {
     	int absposition = talonGear2.getPulseWidthPosition();
 		talonGear2.setEncPosition(absposition);
-		System.out.println("Position: " + absposition);
+		return absposition;
     }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

@@ -22,6 +22,9 @@ public class GearMechMove extends Command {
     private static final double MAX_VOLTAGE = 1;
     private static final double MIN_VOLTAGE = 0;
     
+    private final static double STOP_THRESHOLD_REAL = .25; //3.0;
+    private final static double STOP_THRESHOLD_ADJUSTED = Robot.DRIVE_TRAIN.convertInchesToRevs(STOP_THRESHOLD_REAL / ENCODER_COMPENSATION_VALUE);
+
 	public GearMechMove(double rotations, double P, double I, double D) {
 	    requires(Robot.GEAR_MECH);
 	      
@@ -37,12 +40,14 @@ public class GearMechMove extends Command {
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	double mechPosition = Robot.GEAR_MECH.getMechPosition();
+    	if ((mechPosition > rotationAmount - STOP_THRESHOLD_ADJUSTED ) && (mechPosition < rotationAmount + STOP_THRESHOLD_ADJUSTED)) {
+    		
+    	}
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.GEAR_MECH.getMechPosition();
     	Robot.GEAR_MECH.DoNothing();
     }
 
