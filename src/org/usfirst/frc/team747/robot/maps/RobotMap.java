@@ -13,17 +13,17 @@ public final class RobotMap {
  
 	public enum DriveTrain {
 		
-//        LEFT_FRONT(0),
-//        LEFT_MIDDLE(1),
-//        LEFT_REAR(2),
-//        RIGHT_FRONT(3),
-//        RIGHT_MIDDLE(4),
-//        RIGHT_REAR(5);
+        LEFT_FRONT(0), //for off season robot
+        LEFT_MIDDLE(1),
+        LEFT_REAR(2),
+        RIGHT_FRONT(3),
+        RIGHT_MIDDLE(4),
+        RIGHT_REAR(5);
 		
-		LEFT_FRONT(0),
-		LEFT_REAR(1),
-		RIGHT_FRONT(2),
-		RIGHT_REAR(3);
+//		LEFT_FRONT(0), //for testing with Danny bot
+//		LEFT_REAR(1),
+//		RIGHT_FRONT(2),
+//		RIGHT_REAR(3);
 
         private int value;
 
@@ -40,8 +40,8 @@ public final class RobotMap {
 	 */
     public enum GearMech {
 
-//    	GEARMECH_1(6),
-    	GEARMECH_2(8);
+    	GEAR_INTAKE(6), //INTAKE
+    	GEAR_TRANSFER(7); //GEAR TRANSFER
  
     	private int value;
     	

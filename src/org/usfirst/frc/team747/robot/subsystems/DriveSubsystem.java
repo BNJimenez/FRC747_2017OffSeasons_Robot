@@ -18,10 +18,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSubsystem extends Subsystem {
 	
     public CANTalon talonDriveLeftPrimary = new CANTalon(RobotMap.DriveTrain.LEFT_FRONT.getValue()),
-//            		talonDriveLeftMid = new CANTalon(RobotMap.DriveTrain.LEFT_MIDDLE.getValue()),
+            		talonDriveLeftMid = new CANTalon(RobotMap.DriveTrain.LEFT_MIDDLE.getValue()),
             		talonDriveLeftBack = new CANTalon(RobotMap.DriveTrain.LEFT_REAR.getValue()),
             		talonDriveRightPrimary = new CANTalon(RobotMap.DriveTrain.RIGHT_FRONT.getValue()),
-//            		talonDriveRightMid = new CANTalon(RobotMap.DriveTrain.RIGHT_MIDDLE.getValue()),
+            		talonDriveRightMid = new CANTalon(RobotMap.DriveTrain.RIGHT_MIDDLE.getValue()),
             		talonDriveRightBack = new CANTalon(RobotMap.DriveTrain.RIGHT_REAR.getValue());
     
     private static final double ENCODER_TICKS = 4096;
@@ -43,24 +43,24 @@ public class DriveSubsystem extends Subsystem {
         
         
         this.talonDriveLeftPrimary.setInverted(true);
-//        this.talonDriveLeftMid.setInverted(true);
+        this.talonDriveLeftMid.setInverted(true);
         this.talonDriveLeftBack.setInverted(true);
         
         this.talonDriveRightPrimary.setInverted(false);
-//        this.talonDriveRightMid.setInverted(false);
+        this.talonDriveRightMid.setInverted(false);
         this.talonDriveRightBack.setInverted(false);
         
         this.talonDriveLeftPrimary.reverseSensor(true);
         this.talonDriveRightPrimary.reverseSensor(false);       
        
-//        this.talonDriveLeftMid.changeControlMode(CANTalon.TalonControlMode.Follower);
-//        this.talonDriveLeftMid.set(this.talonDriveLeftPrimary.getDeviceID());
+        this.talonDriveLeftMid.changeControlMode(CANTalon.TalonControlMode.Follower);
+        this.talonDriveLeftMid.set(this.talonDriveLeftPrimary.getDeviceID());
        
         this.talonDriveLeftBack.changeControlMode(CANTalon.TalonControlMode.Follower);
         this.talonDriveLeftBack.set(this.talonDriveLeftPrimary.getDeviceID());
         
-//        this.talonDriveRightMid.changeControlMode(CANTalon.TalonControlMode.Follower);
-//        this.talonDriveRightMid.set(this.talonDriveRightPrimary.getDeviceID());
+        this.talonDriveRightMid.changeControlMode(CANTalon.TalonControlMode.Follower);
+        this.talonDriveRightMid.set(this.talonDriveRightPrimary.getDeviceID());
         
         this.talonDriveRightBack.changeControlMode(CANTalon.TalonControlMode.Follower);
         this.talonDriveRightBack.set(this.talonDriveRightPrimary.getDeviceID());
@@ -71,13 +71,13 @@ public class DriveSubsystem extends Subsystem {
         this.talonDriveLeftPrimary.reverseOutput(true);
         this.talonDriveRightPrimary.reverseOutput(false);
         
-//        this.talonDriveLeftPrimary.setF(0.1489);
-//        this.talonDriveRightPrimary.setF(0.1489);
-//        
-//        this.talonDriveLeftPrimary.setMotionMagicCruiseVelocity(269); //706
-//        this.talonDriveLeftPrimary.setMotionMagicAcceleration(269); //706
-//        this.talonDriveRightPrimary.setMotionMagicCruiseVelocity(269); //706
-//        this.talonDriveRightPrimary.setMotionMagicAcceleration(269); //706
+        this.talonDriveLeftPrimary.setF(0.1489);
+        this.talonDriveRightPrimary.setF(0.1489);
+        
+        this.talonDriveLeftPrimary.setMotionMagicCruiseVelocity(269); //706
+        this.talonDriveLeftPrimary.setMotionMagicAcceleration(269); //706
+        this.talonDriveRightPrimary.setMotionMagicCruiseVelocity(269); //706
+        this.talonDriveRightPrimary.setMotionMagicAcceleration(269); //706
        
     }
     

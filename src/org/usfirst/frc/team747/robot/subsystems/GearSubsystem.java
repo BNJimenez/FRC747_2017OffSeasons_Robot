@@ -2,7 +2,7 @@ package org.usfirst.frc.team747.robot.subsystems;
 
 import org.usfirst.frc.team747.robot.Robot;
 import org.usfirst.frc.team747.robot.maps.RobotMap;
-import org.usfirst.frc.team747.robot.commands.GearMechMove;
+import org.usfirst.frc.team747.robot.commands.GearMechMovePID;
 import org.usfirst.frc.team747.robot.commands.SpitOutGearCommand;
 import org.usfirst.frc.team747.robot.commands.GearDoNothing;
 
@@ -17,64 +17,114 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class GearSubsystem extends Subsystem {
 	
-    private static final double ENCODER_TICKS = 1028;
-
+    private static final double ENCODER_TICKS = 4096;
+// 4096 for the mag encoders
     private static final double MAX_VOLTAGE = 3;
     private static final double MIN_VOLTAGE = 0;
 	private double speed = 1.0;
-	private int loops = 0;
 
-
-	
-    public  CANTalon /*talonGear1 = new CANTalon(RobotMap.GearMech.GEARMECH_1.getValue()), */
-    				 talonGear2 = new CANTalon(RobotMap.GearMech.GEARMECH_2.getValue());
+    public  CANTalon talonGearIntake = new CANTalon(RobotMap.GearMech.GEAR_INTAKE.getValue()),
+    				 talonGearTransfer = new CANTalon(RobotMap.GearMech.GEAR_TRANSFER.getValue());
 
     public GearSubsystem() {
     	
-//		talonGear1.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		talonGear2.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		talonGearIntake.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		talonGearTransfer.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
-		talonGear2.changeControlMode(TalonControlMode.Position);
-		talonGear2.configNominalOutputVoltage(MIN_VOLTAGE, -1*MIN_VOLTAGE);
-		talonGear2.configPeakOutputVoltage(MAX_VOLTAGE, -1*MAX_VOLTAGE);
-		talonGear2.setAllowableClosedLoopErr(0);
-
-		
+		talonGearTransfer.changeControlMode(TalonControlMode.MotionMagic);
+		talonGearTransfer.configNominalOutputVoltage(MIN_VOLTAGE, -MIN_VOLTAGE);
+		talonGearTransfer.configPeakOutputVoltage(MAX_VOLTAGE, -MAX_VOLTAGE);
+		talonGearTransfer.setAllowableClosedLoopErr(0);
 	}
     
+    public void setGearTransferPID(double gearTicks) {
+        this.talonGearTransfer.set(gearTicks);
+    }
+    
     public double convertRevsToTicks(double revs) {
-        return revs * ENCODER_TICKS;
+        return revs * ENCODER_TICKS / 50;
     }
     
     public double convertTicksToRevs(double ticks) {
         return ticks / ENCODER_TICKS;
     }
-    public void enablePositionControl() {
-    	talonGear2.changeControlMode(TalonControlMode.Position);
+
+    public double getGearTransferPosition() {
+		return talonGearTransfer.getPosition();
     }
-    public int getMechPosition() {
-    	int absposition = talonGear2.getPulseWidthPosition();
-		talonGear2.setEncPosition(absposition);
-		return absposition;
+    
+    public void resetGearTransferEncoder() {
+        this.enableVBusControl();
+        talonGearTransfer.setPosition(0);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
+    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new GearDoNothing());
     }
-   
+    
+    public void SuckInGear() {
+        //rollers roll to to bring in the gear
+        talonGearIntake.set(0.3);
+    }
+    
     public void SpitOutGear() {
     	//reverse the talon output so the rollers roll the opposite direction
-//    	talonGear1.set(-1*speed);
-    	
-    	
+    	talonGearIntake.set(-0.3);
     }
 	public void DoNothing(){	
-		//Set both talons to default mode and set to 0
+		//Set the intake to a speed of 0
 		
-//		talonGear1.set(0);
-		talonGear2.changeControlMode(TalonControlMode.PercentVbus);
-		talonGear2.set(0);
+		talonGearIntake.set(0);
 	}
+	
+    public void changeControlMode(TalonControlMode mode) {
+        this.talonGearTransfer.changeControlMode(mode);
+    }
+    
+    public void stop() {
+        TalonControlMode mode = this.talonGearTransfer.getControlMode();
+
+        double gearTransferPosition = 0;
+        
+        switch (mode) {
+        case Position:
+            gearTransferPosition = this.talonGearTransfer.getPosition();
+            break;
+        case PercentVbus:
+        case Speed:
+        case Voltage:
+        default:
+            // Values should be 0;
+            break;
+        }
+        
+        this.setGearTransferPID(gearTransferPosition);
+    }
+    
+    public void talonEnableControl() {
+        talonGearTransfer.enableControl();
+    }
+    
+    public void talonDisableControl() {
+        talonGearTransfer.disableControl();
+    }
+    
+    public void enablePositionControl() {
+        this.changeControlMode(TalonControlMode.MotionMagic);
+//        this.talonEnableControl();
+    }
+
+    public void enableVBusControl() {
+//        this.talonDisableControl();
+        this.changeControlMode(TalonControlMode.PercentVbus);
+    }
 }
 
 

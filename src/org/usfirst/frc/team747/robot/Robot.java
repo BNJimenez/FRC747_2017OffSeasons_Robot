@@ -10,6 +10,8 @@ import org.usfirst.frc.team747.robot.subsystems.GearSubsystem;
 import org.usfirst.frc.team747.robot.vision.Target;
 import org.usfirst.frc.team747.robot.vision.VisionTracking;
 
+import edu.wpi.first.wpilibj.CameraServer;
+
 //import java.util.HashMap;
 
 //import com.ctre.CANTalon.TalonControlMode;
@@ -71,6 +73,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+        CameraServer server = CameraServer.getInstance();
+	    
         resetNavXAngle();
         DRIVE_TRAIN.changeControlMode(TalonControlMode.PercentVbus);
 	}
