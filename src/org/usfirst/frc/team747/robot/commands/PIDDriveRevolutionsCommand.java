@@ -38,36 +38,26 @@ public class PIDDriveRevolutionsCommand extends Command {
 
 	private double specificDistanceInches;
 	
-	private double specificDistanceP;
+	private double specificDistanceP = 1.5;
 	
-	private double specificDistanceI;
+	private double specificDistanceI = 0.01;
 	
-	private double specificDistanceD;
+	private double specificDistanceD = 60;
 	
     //the values used for motion magic (universal PID values for driving forward and back
     
-    private final static double FORWARD_TO_SHOOT_DISTANCE = 81.25; //33
-    private final static double FORWARD_TO_SHOOT_P = 1.5; //4.5 / 32;
-    private final static double FORWARD_TO_SHOOT_I = 0.01; //0.005 / 32;
-    private final static double FORWARD_TO_SHOOT_D = 60; //200.0 / 32;
+    private final static double FORWARD_TO_SHOOT_DISTANCE = 81.25;
+    private final static double FORWARD_TO_SHOOT_P = 1.5;
+    private final static double FORWARD_TO_SHOOT_I = 0.01;
+    private final static double FORWARD_TO_SHOOT_D = 60;
     
 
 	
-	public PIDDriveRevolutionsCommand(double revolutions, double P, double I, double D) {
+	public PIDDriveRevolutionsCommand(double inches, boolean reverse) {
 	    requires(Robot.DRIVE_TRAIN);
 	      
-	    this.driveRevolutions = revolutions / ENCODER_COMPENSATION_VALUE;
-		this.driveP = P;
-		this.driveI = I;
-		this.driveD = D;
-	}
+	    this.driveRevolutions = inches / ENCODER_COMPENSATION_VALUE;
 	
-	public PIDDriveRevolutionsCommand(String specificDistance, boolean reverse) {
-	    this(0, 0, 0, 0);
-	    
-	    
-
-        
 	    if (reverse) {
 	        this.driveRevolutions = -Robot.DRIVE_TRAIN.convertInchesToRevs(specificDistanceInches / ENCODER_COMPENSATION_VALUE);
 	    } else {

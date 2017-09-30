@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GearMechMoveHomePositionCommand extends Command {
+public class NOPIDGearTransferHomePositionCommand extends Command {
 
-    public GearMechMoveHomePositionCommand() {
+    public NOPIDGearTransferHomePositionCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.GEAR_MECH);
     }

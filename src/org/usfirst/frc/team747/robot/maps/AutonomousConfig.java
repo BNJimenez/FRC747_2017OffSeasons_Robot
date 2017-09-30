@@ -27,9 +27,9 @@ public final class AutonomousConfig {
     	private PIDGearMech() {
     		
     	}
-    	public static final String 	MECH_TO_SCOOP = "MECH_TO_SCOOP",
-    								MECH_TO_DEPLOY = "MECH_TO_DEPLOY",
-    								MECH_TO_DROP = "MECH_TO_DROP";
+    	public static final String 	GEAR_TRANSFER_PICK_UP_POSITION = "MECH_TO_SCOOP",
+    								GEAR_TRANSFER_HOME_POSITION = "MECH_TO_DEPLOY",
+    								GEAR_TRANSFER_SCORE_POSITION = "MECH_TO_DROP";
     }
     public final class CrossLine{
         

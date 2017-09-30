@@ -24,25 +24,30 @@ public class GearDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	 double gearTransferDrive = -OI.CONTROLLER_OPERATOR.getRawAxis(DriverStation.GamePad.AXIS_LEFT_Y.getValue());
+        //with a negative sign it pulling down on the left joystick would make the gear transfer move towards
+        //the front and pushing up would make the gear transfer move towards the back of the robot
+        //to counteract this, I removed the negative sign in front of OI
+    	 double gearTransferDrive = OI.CONTROLLER_OPERATOR.getRawAxis(DriverStation.GamePad.AXIS_LEFT_Y.getValue());
          
          if (Math.abs(gearTransferDrive) < 0.1) {
              gearTransferDrive = 0;
+         } else if (Robot.gearPickUpLimitSwitch.get() && gearTransferDrive <= 0) {
+             
          }
          
-         double speed = 1;
+         double speed = 0.5;
          
          Robot.GEAR_MECH.talonGearTransfer.set(gearTransferDrive * speed);         
     }
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.gearScoreLimitSwitch.get() || Robot.gearPickUpLimitSwitch.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-//    	Robot.DRIVE_TRAIN.stop();
+    	Robot.DRIVE_TRAIN.stop();
     }
 
     // Called when another command which requires one or more of the same

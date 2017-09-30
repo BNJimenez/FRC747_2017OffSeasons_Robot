@@ -5,12 +5,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+import org.usfirst.frc.team747.robot.commands.GearTransferHomingCommand;
 import org.usfirst.frc.team747.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team747.robot.subsystems.GearSubsystem;
 import org.usfirst.frc.team747.robot.vision.Target;
 import org.usfirst.frc.team747.robot.vision.VisionTracking;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 //import java.util.HashMap;
@@ -48,7 +50,7 @@ public class Robot extends IterativeRobot {
     public static File logs, driveLog;
 	public static BufferedWriter bw, bwDrive;
 	public static FileWriter fw, fwDrive;
-    
+	
     public static OI oi = null;
     
     public static DigitalInput gearPickUpLimitSwitch = new DigitalInput(1), gearHomeLimitSwitch = new DigitalInput(2), gearScoreLimitSwitch = new DigitalInput(0);
@@ -80,6 +82,9 @@ public class Robot extends IterativeRobot {
 //	    CameraServer.getInstance().startAutomaticCapture();
 //        resetNavXAngle();
         DRIVE_TRAIN.changeControlMode(TalonControlMode.PercentVbus);
+        UsbCamera ucamera = CameraServer.getInstance().startAutomaticCapture("cam1", 0);
+        ucamera.setResolution(180, 240);
+
         if (oi == null) {
             oi = new OI();
         }
@@ -112,7 +117,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		autonomousCommand = new GearTransferHomingCommand();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

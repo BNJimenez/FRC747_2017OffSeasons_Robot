@@ -7,7 +7,7 @@ import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class GearMechMovePIDCommand extends Command {
+public class GearTransferPIDRevolutionsCommand extends Command {
 	
 	private double stopPosition;
 //	private double gearP;
@@ -20,8 +20,7 @@ public class GearMechMovePIDCommand extends Command {
     private static final double MAX_VOLTAGE = 3;
     private static final double MIN_VOLTAGE = 0;
     
-    private final static double STOP_THRESHOLD_REAL = .25; //3.0;
-    private final static double STOP_THRESHOLD_ADJUSTED = Robot.DRIVE_TRAIN.convertInchesToRevs(STOP_THRESHOLD_REAL / ENCODER_COMPENSATION_VALUE);
+    private final static double STOP_THRESHOLD_REAL_REVOLUTIONS = 0.314941406;
 
     private int onTargetCount = 0;
 
@@ -32,21 +31,20 @@ public class GearMechMovePIDCommand extends Command {
     //Half a second is being multiplied by the user input to achieve the desired "ON_TARGET_COUNT"
     private final static double ON_TARGET_MINIMUM_COUNT = TARGET_COUNT_ONE_SECOND * 0.25;
 
-    public GearMechMovePIDCommand(double ticks) {
+    public GearTransferPIDRevolutionsCommand(double revolutions) {
 	    requires(Robot.GEAR_MECH);
 	    
-	    gearTicks = ticks;
+	    gearTicks = revolutions;
 
-	    this.stopPosition = ticks / ENCODER_COMPENSATION_VALUE;
+	    this.stopPosition = revolutions / ENCODER_COMPENSATION_VALUE;
 	}
 	
     protected void initialize() {
         
         onTargetCount = 0;
-        Robot.GEAR_MECH.resetGearTransferEncoder();
     	Robot.GEAR_MECH.enablePositionControl();
     	
-    	Robot.GEAR_MECH.talonGearTransfer.setPID(0.1, 0.0, 0.0);
+    	Robot.GEAR_MECH.talonGearTransfer.setPID(0.5, 0.0, 0.0);
         Robot.GEAR_MECH.talonGearTransfer.setF(0.0);
     	Robot.GEAR_MECH.setGearTransferPID(gearTicks);
 
@@ -59,7 +57,7 @@ public class GearMechMovePIDCommand extends Command {
     protected boolean isFinished() {
     	double mechPosition = Robot.GEAR_MECH.getGearTransferPosition();
     	
-    	if ((mechPosition > stopPosition - STOP_THRESHOLD_ADJUSTED ) && (mechPosition < stopPosition + STOP_THRESHOLD_ADJUSTED)) {
+    	if ((mechPosition > stopPosition - STOP_THRESHOLD_REAL_REVOLUTIONS ) && (mechPosition < stopPosition + STOP_THRESHOLD_REAL_REVOLUTIONS)) {
     	    onTargetCount++;
     	}else {
     	    onTargetCount = 0;    	        

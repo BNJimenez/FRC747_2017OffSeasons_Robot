@@ -35,7 +35,9 @@ public class OI {
 	 	BUTTON_GEAR_SCORE_POSITION
 	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_B.getValue()),
 	 	BUTTON_GEAR_TRANSFER_ENCODER_RESET
-	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_START.getValue());
+	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_START.getValue()),
+	 	BUTTON_GEAR_HOMING_BUTTON
+	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_BACK.getValue());
 	 		
 	   public static final GearDeployButtonCommand BUTTON_GEAR_DEPLOY = new GearDeployButtonCommand();
 	 
@@ -44,10 +46,11 @@ public class OI {
 	public OI() {
 		BUTTON_GEAR_INTAKE.whileHeld(new SuckInGearCommand());
 		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
-        BUTTON_GEAR_PICK_UP_POSITION.whenPressed(new GearMechMovePIDCommand(2));
-        BUTTON_GEAR_HOME_POSITION.whenPressed(new GearMechMovePIDCommand(1));
-        BUTTON_GEAR_SCORE_POSITION.whenPressed(new GearMechMovePIDCommand(0));
+        BUTTON_GEAR_PICK_UP_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(9.012568279)); //8.910400380625
+        BUTTON_GEAR_HOME_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(2.3232421875));
+        BUTTON_GEAR_SCORE_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(0.0));
         BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
+        BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
         
 	new Notifier(() -> updateOI()).startPeriodic(0.100); //value in seconds
 	}
@@ -75,6 +78,7 @@ public class OI {
 		//SmartDashboard.putNumber("Degrees to Boiler Target:", Robot.getCVAngle(Robot.VISION_TRACKING_REAR, "BOILER"));
 //		SmartDashboard.putNumber("Distance to Target:", Robot.getCVDistance(Robot.VISION_TRACKING_REAR, "GEAR"));
 //		SmartDashboard.putNumber("Degrees to Target:", (Robot.getCVAngle(Robot.VISION_TRACKING_REAR, "GEAR")));
+		
 	}
 }
 

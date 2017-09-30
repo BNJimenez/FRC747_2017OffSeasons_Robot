@@ -2,7 +2,7 @@ package org.usfirst.frc.team747.robot.subsystems;
 
 import org.usfirst.frc.team747.robot.Robot;
 import org.usfirst.frc.team747.robot.maps.RobotMap;
-import org.usfirst.frc.team747.robot.commands.GearMechMovePIDCommand;
+import org.usfirst.frc.team747.robot.commands.GearTransferPIDRevolutionsCommand;
 import org.usfirst.frc.team747.robot.commands.SpitOutGearCommand;
 import org.usfirst.frc.team747.robot.commands.GearDoNothingCommand;
 import org.usfirst.frc.team747.robot.commands.GearDriveCommand;
@@ -22,7 +22,10 @@ public class GearSubsystem extends Subsystem {
 // 4096 for the mag encoders
     private static final double MAX_VOLTAGE = 3;
     private static final double MIN_VOLTAGE = 0;
-	private double speed = 1.0;
+	public double INTAKE_SPEED = 1.0;
+	public double GEAR_TRANSFER_FAST_SPEED = 0.5;
+	public double GEAR_TRANSFER_MODERATE_SPEED = 0.25;
+	public double GEAR_TRANSFER_SLOW_SPEED = 0.1;
 
     public  CANTalon talonGearIntake = new CANTalon(RobotMap.GearMech.GEAR_INTAKE.getValue()),
     				 talonGearTransfer = new CANTalon(RobotMap.GearMech.GEAR_TRANSFER.getValue());
