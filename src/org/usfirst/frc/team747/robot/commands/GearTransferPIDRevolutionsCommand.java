@@ -17,7 +17,7 @@ public class GearTransferPIDRevolutionsCommand extends Command {
 	
 	private final static double ENCODER_COMPENSATION_VALUE = 1;
 
-    private static final double MAX_VOLTAGE = 3;
+    private static final double MAX_VOLTAGE = 9;
     private static final double MIN_VOLTAGE = 0;
     
     private final static double STOP_THRESHOLD_REAL_REVOLUTIONS = 0.314941406;
@@ -68,7 +68,8 @@ public class GearTransferPIDRevolutionsCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.GEAR_MECH.stop();    }
+        Robot.GEAR_MECH.stop();
+        }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run

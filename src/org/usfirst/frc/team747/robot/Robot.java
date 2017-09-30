@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
 	
     public static OI oi = null;
     
-    public static DigitalInput gearPickUpLimitSwitch = new DigitalInput(1), gearHomeLimitSwitch = new DigitalInput(2), gearScoreLimitSwitch = new DigitalInput(0);
+    public static DigitalInput gearPickUpLimitSwitch = new DigitalInput(1), gearHomeLimitSwitch = new DigitalInput(2);// gearScoreLimitSwitch = new DigitalInput(0);
     
     
 //    private static final AHRS NAV_X = new AHRS (SPI.Port.kMXP);

@@ -63,7 +63,7 @@ public class OI {
 	public void updateOI() {
 	    SmartDashboard.putBoolean("Gear Pick Up Limit:", Robot.gearPickUpLimitSwitch.get());
 	    SmartDashboard.putBoolean("Gear Home Limit:", Robot.gearHomeLimitSwitch.get());
-	    SmartDashboard.putBoolean("Gear Score Limit:", Robot.gearScoreLimitSwitch.get());
+//	    SmartDashboard.putBoolean("Gear Score Limit:", Robot.gearScoreLimitSwitch.get());
 		SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition());
 		SmartDashboard.putNumber("Right Encoder Position:", Robot.DRIVE_TRAIN.getRightEncoderPosition());
 		//SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition() * 4);
