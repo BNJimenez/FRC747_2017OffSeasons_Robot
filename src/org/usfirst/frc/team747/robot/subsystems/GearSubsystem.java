@@ -2,9 +2,10 @@ package org.usfirst.frc.team747.robot.subsystems;
 
 import org.usfirst.frc.team747.robot.Robot;
 import org.usfirst.frc.team747.robot.maps.RobotMap;
-import org.usfirst.frc.team747.robot.commands.GearMechMovePID;
+import org.usfirst.frc.team747.robot.commands.GearMechMovePIDCommand;
 import org.usfirst.frc.team747.robot.commands.SpitOutGearCommand;
-import org.usfirst.frc.team747.robot.commands.GearDoNothing;
+import org.usfirst.frc.team747.robot.commands.GearDoNothingCommand;
+import org.usfirst.frc.team747.robot.commands.GearDriveCommand;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -28,9 +29,8 @@ public class GearSubsystem extends Subsystem {
 
     public GearSubsystem() {
     	
-		talonGearIntake.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+        
 		talonGearTransfer.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		
 		talonGearTransfer.changeControlMode(TalonControlMode.MotionMagic);
 		talonGearTransfer.configNominalOutputVoltage(MIN_VOLTAGE, -MIN_VOLTAGE);
 		talonGearTransfer.configPeakOutputVoltage(MAX_VOLTAGE, -MAX_VOLTAGE);
@@ -66,7 +66,7 @@ public class GearSubsystem extends Subsystem {
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new GearDoNothing());
+        setDefaultCommand(new GearDriveCommand());
     }
     
     public void SuckInGear() {

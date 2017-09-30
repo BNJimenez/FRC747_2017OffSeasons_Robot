@@ -21,23 +21,34 @@ public class OI {
 	//// CREATING BUTTONS
 	 public static final Joystick 
 	 //Joysticks control both climb and drive
-		JOYSTICK_DRIVER_LEFT= new Joystick(DriverStation.Controller.DRIVER_LEFT.getValue()),
+		JOYSTICK_DRIVER_LEFT = new Joystick(DriverStation.Controller.DRIVER_LEFT.getValue()),
 		JOYSTICK_DRIVER_RIGHT = new Joystick(DriverStation.Controller.DRIVER_RIGHT.getValue()),
 		CONTROLLER_OPERATOR = new Joystick(DriverStation.Controller.OPERATOR.getValue());
 	 
 	 public static final JoystickButton
 	 	BUTTON_GEAR_INTAKE 
 	 		= new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_LB.getValue()),
-	 	BUTTON_GEAR_DEPLOY
-	 		= new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_RB.getValue());
-
-		    	
+	 	BUTTON_GEAR_PICK_UP_POSITION
+	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_A.getValue()),
+	 	BUTTON_GEAR_HOME_POSITION
+	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_Y.getValue()),
+	 	BUTTON_GEAR_SCORE_POSITION
+	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_B.getValue()),
+	 	BUTTON_GEAR_TRANSFER_ENCODER_RESET
+	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_START.getValue());
+	 		
+	   public static final GearDeployButtonCommand BUTTON_GEAR_DEPLOY = new GearDeployButtonCommand();
+	 
     static Preferences prefs;
     
 	public OI() {
 		BUTTON_GEAR_INTAKE.whileHeld(new SuckInGearCommand());
-//		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
-			
+		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
+        BUTTON_GEAR_PICK_UP_POSITION.whenPressed(new GearMechMovePIDCommand(2));
+        BUTTON_GEAR_HOME_POSITION.whenPressed(new GearMechMovePIDCommand(1));
+        BUTTON_GEAR_SCORE_POSITION.whenPressed(new GearMechMovePIDCommand(0));
+        BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
+        
 	new Notifier(() -> updateOI()).startPeriodic(0.100); //value in seconds
 	}
 	
@@ -47,6 +58,9 @@ public class OI {
 	}
 	
 	public void updateOI() {
+	    SmartDashboard.putBoolean("Gear Pick Up Limit:", Robot.gearPickUpLimitSwitch.get());
+	    SmartDashboard.putBoolean("Gear Home Limit:", Robot.gearHomeLimitSwitch.get());
+	    SmartDashboard.putBoolean("Gear Score Limit:", Robot.gearScoreLimitSwitch.get());
 		SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition());
 		SmartDashboard.putNumber("Right Encoder Position:", Robot.DRIVE_TRAIN.getRightEncoderPosition());
 		//SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition() * 4);
@@ -55,7 +69,8 @@ public class OI {
 		//SmartDashboard.putNumber("Right Position (Revolutions):", Robot.DRIVE_TRAIN.getRightPosition() * 4);
 		SmartDashboard.putNumber("Left Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getLeftPosition()));
 		SmartDashboard.putNumber("Right Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getRightPosition()));
-		SmartDashboard.putNumber("NavX Angle:", Robot.getNavXAngle());
+//		SmartDashboard.putNumber("NavX Angle:", Robot.getNavXAngle());
+		SmartDashboard.putNumber("Gear Transfer Position (Ticks):", Robot.GEAR_MECH.getGearTransferPosition());
 		//SmartDashboard.putNumber("Distance to Boiler Target:", Robot.getCVDistance(Robot.VISION_TRACKING_REAR, "BOILER"));
 		//SmartDashboard.putNumber("Degrees to Boiler Target:", Robot.getCVAngle(Robot.VISION_TRACKING_REAR, "BOILER"));
 //		SmartDashboard.putNumber("Distance to Target:", Robot.getCVDistance(Robot.VISION_TRACKING_REAR, "GEAR"));

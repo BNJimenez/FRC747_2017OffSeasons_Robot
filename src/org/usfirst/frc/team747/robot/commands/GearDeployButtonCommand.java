@@ -4,7 +4,7 @@ import org.usfirst.frc.team747.robot.OI;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
-public class GearDeployButton extends Button{
+public class GearDeployButtonCommand extends Button{
 
     @Override
     public boolean get() {

@@ -87,7 +87,7 @@ public class PIDDriveRevolutionsCommand extends Command {
 	    
 	    firstPass = false;
 	    Robot.DRIVE_TRAIN.resetBothEncoders();
-	    Robot.resetNavXAngle();
+//	    Robot.resetNavXAngle();
         Robot.DRIVE_TRAIN.enablePositionControl();
         
         
@@ -165,7 +165,7 @@ public class PIDDriveRevolutionsCommand extends Command {
 	protected void end() {
 		Robot.DRIVE_TRAIN.enableVBusControl();
 		Robot.DRIVE_TRAIN.resetBothEncoders();
-		Robot.resetNavXAngle();
+//		Robot.resetNavXAngle();
 		Robot.DRIVE_TRAIN.stop();
 	}
 	

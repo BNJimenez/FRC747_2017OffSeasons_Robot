@@ -7,7 +7,7 @@ import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class GearMechMovePID extends Command {
+public class GearMechMovePIDCommand extends Command {
 	
 	private double stopPosition;
 //	private double gearP;
@@ -32,7 +32,7 @@ public class GearMechMovePID extends Command {
     //Half a second is being multiplied by the user input to achieve the desired "ON_TARGET_COUNT"
     private final static double ON_TARGET_MINIMUM_COUNT = TARGET_COUNT_ONE_SECOND * 0.25;
 
-    public GearMechMovePID(double ticks) {
+    public GearMechMovePIDCommand(double ticks) {
 	    requires(Robot.GEAR_MECH);
 	    
 	    gearTicks = ticks;

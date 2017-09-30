@@ -11,6 +11,7 @@ import org.usfirst.frc.team747.robot.vision.Target;
 import org.usfirst.frc.team747.robot.vision.VisionTracking;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 //import java.util.HashMap;
 
@@ -49,20 +50,23 @@ public class Robot extends IterativeRobot {
 	public static FileWriter fw, fwDrive;
     
     public static OI oi = null;
-
-    private static final AHRS NAV_X = new AHRS (SPI.Port.kMXP);
     
-    public static double getNavXAngle() {
-    	return NAV_X.getYaw();
-    }
+    public static DigitalInput gearPickUpLimitSwitch = new DigitalInput(1), gearHomeLimitSwitch = new DigitalInput(2), gearScoreLimitSwitch = new DigitalInput(0);
     
-    public static double getNavXAngleRadians() {
-    	return Math.toRadians(getNavXAngle());
-    }
     
-    public static void resetNavXAngle() {
-    	NAV_X.zeroYaw();
-    }
+//    private static final AHRS NAV_X = new AHRS (SPI.Port.kMXP);
+    
+//    public static double getNavXAngle() {
+//    	return NAV_X.getYaw();
+//    }
+    
+//    public static double getNavXAngleRadians() {
+//    	return Math.toRadians(getNavXAngle());
+//    }
+//    
+//    public static void resetNavXAngle() {
+//    	NAV_X.zeroYaw();
+//    }
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -73,10 +77,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-        CameraServer server = CameraServer.getInstance();
-	    
-        resetNavXAngle();
+//	    CameraServer.getInstance().startAutomaticCapture();
+//        resetNavXAngle();
         DRIVE_TRAIN.changeControlMode(TalonControlMode.PercentVbus);
+        if (oi == null) {
+            oi = new OI();
+        }
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -114,7 +120,9 @@ public class Robot extends IterativeRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
-
+        if (oi == null) {
+            oi = new OI();
+        }
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -130,7 +138,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		resetNavXAngle();
+//		resetNavXAngle();
 		Robot.DRIVE_TRAIN.resetBothEncoders();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -155,11 +163,4 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
-	public static double getCVAngle(VisionTracking visionTracking, String targetId) {
-        Target target = visionTracking.getTarget(targetId);
-        if (target != null) {
-            return target.getAngleDegrees();
-        }
-        return -1;
-    }
 }
