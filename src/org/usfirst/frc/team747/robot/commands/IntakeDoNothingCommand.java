@@ -7,10 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SuckInGearCommand extends Command {
+public class IntakeDoNothingCommand extends Command {
 
-    public SuckInGearCommand() {
-    	requires(Robot.INTAKE);
+    public IntakeDoNothingCommand() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.INTAKE);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +20,7 @@ public class SuckInGearCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.INTAKE.SuckInGear();
+        Robot.INTAKE.DoNothing();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,12 +30,10 @@ public class SuckInGearCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.INTAKE.DoNothing();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

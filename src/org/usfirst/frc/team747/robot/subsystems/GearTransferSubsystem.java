@@ -16,21 +16,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class GearSubsystem extends Subsystem {
+public class GearTransferSubsystem extends Subsystem {
 	
     private static final double ENCODER_TICKS = 4096;
 // 4096 for the mag encoders
     private static final double MAX_VOLTAGE = 3;
     private static final double MIN_VOLTAGE = 0;
-	public double INTAKE_SPEED = 1.0;
 	public double GEAR_TRANSFER_FAST_SPEED = 0.5;
 	public double GEAR_TRANSFER_MODERATE_SPEED = 0.25;
 	public double GEAR_TRANSFER_SLOW_SPEED = 0.1;
 
-    public  CANTalon talonGearIntake = new CANTalon(RobotMap.GearMech.GEAR_INTAKE.getValue()),
-    				 talonGearTransfer = new CANTalon(RobotMap.GearMech.GEAR_TRANSFER.getValue());
+    public  CANTalon talonGearTransfer = new CANTalon(RobotMap.GearMech.GEAR_TRANSFER.getValue());
 
-    public GearSubsystem() {
+    public GearTransferSubsystem() {
     	
         
 		talonGearTransfer.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
@@ -72,21 +70,6 @@ public class GearSubsystem extends Subsystem {
         setDefaultCommand(new GearDriveCommand());
     }
     
-    public void SuckInGear() {
-        //rollers roll to to bring in the gear
-        talonGearIntake.set(0.3);
-    }
-    
-    public void SpitOutGear() {
-    	//reverse the talon output so the rollers roll the opposite direction
-    	talonGearIntake.set(-0.3);
-    }
-	public void DoNothing(){	
-		//Set the intake to a speed of 0
-		
-		talonGearIntake.set(0);
-	}
-	
     public void changeControlMode(TalonControlMode mode) {
         this.talonGearTransfer.changeControlMode(mode);
     }

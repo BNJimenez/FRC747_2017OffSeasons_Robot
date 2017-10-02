@@ -5,9 +5,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+import org.usfirst.frc.team747.robot.commands.DriveForwardAutoCommandGroup;
 import org.usfirst.frc.team747.robot.commands.GearTransferHomingCommand;
 import org.usfirst.frc.team747.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team747.robot.subsystems.GearSubsystem;
+import org.usfirst.frc.team747.robot.subsystems.GearTransferSubsystem;
+import org.usfirst.frc.team747.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team747.robot.vision.Target;
 import org.usfirst.frc.team747.robot.vision.VisionTracking;
 
@@ -46,7 +48,8 @@ import com.kauailabs.navx.frc.AHRS;
 public class Robot extends IterativeRobot {
 	
 	public static final DriveSubsystem DRIVE_TRAIN = new DriveSubsystem();
-    public static final GearSubsystem GEAR_MECH = new GearSubsystem();
+    public static final GearTransferSubsystem GEAR_MECH = new GearTransferSubsystem();
+    public static final IntakeSubsystem INTAKE = new IntakeSubsystem();
     public static File logs, driveLog;
 	public static BufferedWriter bw, bwDrive;
 	public static FileWriter fw, fwDrive;
@@ -117,7 +120,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new GearTransferHomingCommand();
+		autonomousCommand = new DriveForwardAutoCommandGroup();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
