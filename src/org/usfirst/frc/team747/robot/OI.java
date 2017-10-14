@@ -3,8 +3,7 @@ package org.usfirst.frc.team747.robot;
 import org.usfirst.frc.team747.robot.commands.*;
 //import org.usfirst.frc.team747.robot.maps.AutonomousConfig;
 import org.usfirst.frc.team747.robot.maps.DriverStation;
-import org.usfirst.frc.team747.robot.maps.RobotMap;
-
+import org.usfirst.frc.team747.robot.maps.ValueConfig;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Notifier;
@@ -38,20 +37,48 @@ public class OI {
 	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_START.getValue()),
 	 	BUTTON_GEAR_HOMING_BUTTON
 	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_BACK.getValue());
-	 		
-	   public static final GearDeployButtonCommand BUTTON_GEAR_DEPLOY = new GearDeployButtonCommand();
+	 
+	 public static final GearDeployButtonCommand BUTTON_GEAR_DEPLOY = new GearDeployButtonCommand();
+
+	 public static final JoystickButton 
+	     BUTTON_PID_TEST_BUTTON_ONE
+	         = new JoystickButton(JOYSTICK_DRIVER_LEFT, DriverStation.Joystick.BUTTON_3.getValue()),
+	     BUTTON_PID_TEST_BUTTON_TWO
+	         = new JoystickButton(JOYSTICK_DRIVER_LEFT, DriverStation.Joystick.BUTTON_4.getValue()),
+	     BUTTON_PID_TEST_BUTTON_THREE
+	         = new JoystickButton(JOYSTICK_DRIVER_LEFT, DriverStation.Joystick.BUTTON_5.getValue()),
+	     BUTTON_PID_TEST_BUTTON_FOUR
+	         = new JoystickButton(JOYSTICK_DRIVER_LEFT, DriverStation.Joystick.BUTTON_6.getValue()),
+	     BUTTON_PID_TEST_REVERSE_BUTTON_ONE
+	         = new JoystickButton(JOYSTICK_DRIVER_RIGHT, DriverStation.Joystick.BUTTON_3.getValue()),
+	     BUTTON_PID_TEST_REVERSE_BUTTON_TWO
+	         = new JoystickButton(JOYSTICK_DRIVER_RIGHT, DriverStation.Joystick.BUTTON_4.getValue()),
+	     BUTTON_PID_TEST_REVERSE_BUTTON_THREE
+	         = new JoystickButton(JOYSTICK_DRIVER_RIGHT, DriverStation.Joystick.BUTTON_5.getValue()),
+	     BUTTON_PID_TEST_REVERSE_BUTTON_FOUR
+	         = new JoystickButton(JOYSTICK_DRIVER_RIGHT, DriverStation.Joystick.BUTTON_6.getValue());
 	 
     static Preferences prefs;
     
 	public OI() {
 		BUTTON_GEAR_INTAKE.whileHeld(new SuckInGearCommand());
 		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
-        BUTTON_GEAR_PICK_UP_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(9.012568279)); //8.910400380625
-        BUTTON_GEAR_HOME_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(2.3232421875));
-        BUTTON_GEAR_SCORE_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(0.0));
+        BUTTON_GEAR_PICK_UP_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.PICK_UP_POSITION)); //8.910400380625
+        BUTTON_GEAR_HOME_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.HOME_POSITION));
+        BUTTON_GEAR_SCORE_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.SCORE_POSITION));
         BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
         BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
         
+//        BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRevolutionsCommand(10, false));
+//        BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRevolutionsCommand(20, false));
+//        BUTTON_PID_TEST_BUTTON_THREE.toggleWhenPressed(new PIDDriveRevolutionsCommand(30, false));
+//        BUTTON_PID_TEST_BUTTON_FOUR.toggleWhenPressed(new PIDDriveRevolutionsCommand(40, false));
+//
+//        BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new PIDDriveRevolutionsCommand(10, true));
+//        BUTTON_PID_TEST_REVERSE_BUTTON_TWO.toggleWhenPressed(new PIDDriveRevolutionsCommand(20, true));
+//        BUTTON_PID_TEST_REVERSE_BUTTON_THREE.toggleWhenPressed(new PIDDriveRevolutionsCommand(30, true));
+//        BUTTON_PID_TEST_REVERSE_BUTTON_FOUR.toggleWhenPressed(new PIDDriveRevolutionsCommand(40, true));
+      
 	new Notifier(() -> updateOI()).startPeriodic(0.100); //value in seconds
 	}
 	
@@ -63,7 +90,7 @@ public class OI {
 	public void updateOI() {
 	    SmartDashboard.putBoolean("Gear Pick Up Limit:", Robot.gearPickUpLimitSwitch.get());
 	    SmartDashboard.putBoolean("Gear Home Limit:", Robot.gearHomeLimitSwitch.get());
-//	    SmartDashboard.putBoolean("Gear Score Limit:", Robot.gearScoreLimitSwitch.get());
+	    SmartDashboard.putBoolean("Gear Score Limit:", Robot.gearScoreLimitSwitch.get());
 		SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition());
 		SmartDashboard.putNumber("Right Encoder Position:", Robot.DRIVE_TRAIN.getRightEncoderPosition());
 		//SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition() * 4);
@@ -73,7 +100,7 @@ public class OI {
 		SmartDashboard.putNumber("Left Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getLeftPosition()));
 		SmartDashboard.putNumber("Right Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getRightPosition()));
 //		SmartDashboard.putNumber("NavX Angle:", Robot.getNavXAngle());
-		SmartDashboard.putNumber("Gear Transfer Position (Ticks):", Robot.GEAR_MECH.getGearTransferPosition());
+		SmartDashboard.putNumber("Gear Transfer Position:", Robot.GEAR_MECH.getGearTransferPosition());
 		//SmartDashboard.putNumber("Distance to Boiler Target:", Robot.getCVDistance(Robot.VISION_TRACKING_REAR, "BOILER"));
 		//SmartDashboard.putNumber("Degrees to Boiler Target:", Robot.getCVAngle(Robot.VISION_TRACKING_REAR, "BOILER"));
 //		SmartDashboard.putNumber("Distance to Target:", Robot.getCVDistance(Robot.VISION_TRACKING_REAR, "GEAR"));

@@ -51,7 +51,7 @@ public class DriveSubsystem extends Subsystem {
         this.talonDriveRightBack.setInverted(false);
         
         this.talonDriveLeftPrimary.reverseSensor(true);
-        this.talonDriveRightPrimary.reverseSensor(false);       
+        this.talonDriveRightPrimary.reverseSensor(true);       
        
         this.talonDriveLeftMid.changeControlMode(CANTalon.TalonControlMode.Follower);
         this.talonDriveLeftMid.set(this.talonDriveLeftPrimary.getDeviceID());
@@ -69,7 +69,7 @@ public class DriveSubsystem extends Subsystem {
         this.talonDriveRightPrimary.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
         
         this.talonDriveLeftPrimary.reverseOutput(true);
-        this.talonDriveRightPrimary.reverseOutput(false);
+        this.talonDriveRightPrimary.reverseOutput(true);
         
         this.talonDriveLeftPrimary.setF(0.1489);
         this.talonDriveRightPrimary.setF(0.1489);

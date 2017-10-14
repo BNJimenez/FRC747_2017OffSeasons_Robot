@@ -28,10 +28,10 @@ public class GearDriveCommand extends Command {
 
     
     
-    private static final double GEAR_TRANSFER_SLOW_SPEED_FIVE = 0.3;
-    private static final double GEAR_TRANSFER_SLOW_SPEED_SIX = 0.25;
-    private static final double GEAR_TRANSFER_SLOW_SPEED_SEVEN = 0.225;
-    private static final double GEAR_TRANSFER_SLOW_SPEED_EIGHT = 0.2;
+    private static final double GEAR_TRANSFER_SLOW_SPEED_FIVE = -0.3;
+    private static final double GEAR_TRANSFER_SLOW_SPEED_SIX = -0.25;
+    private static final double GEAR_TRANSFER_SLOW_SPEED_SEVEN = -0.225;
+    private static final double GEAR_TRANSFER_SLOW_SPEED_EIGHT = -0.2;
     private static final double GEAR_TRANSFER_SLOW_SPEED_FINAL_TWO = 0;
 
     private static final double GEAR_TRANSFER_SLOW_POSITION_FIVE = 0.179;
@@ -71,7 +71,7 @@ public class GearDriveCommand extends Command {
     	     gearTransferDrive = GEAR_TRANSFER_SLOW_SPEED_ONE;
     	 }
     	 
-    	 if (Math.abs(gearTransferDrive) < 0.1 || (Robot.GEAR_MECH.talonGearTransfer.getPosition() < GEAR_TRANSFER_SLOW_POSITION_FINAL_TWO && gearTransferDrive > 0)) {
+    	 if (Math.abs(gearTransferDrive) < 0.1 || (Robot.GEAR_MECH.talonGearTransfer.getPosition() < GEAR_TRANSFER_SLOW_POSITION_FINAL_TWO && gearTransferDrive < 0)) {
              gearTransferDrive = GEAR_TRANSFER_SLOW_SPEED_FINAL_TWO;
          } else if (Robot.GEAR_MECH.talonGearTransfer.getPosition() < GEAR_TRANSFER_SLOW_POSITION_EIGHT && gearTransferDrive < 0) {
              gearTransferDrive = GEAR_TRANSFER_SLOW_SPEED_EIGHT;

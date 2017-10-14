@@ -27,8 +27,6 @@ public class PIDDriveRevolutionsCommand extends Command {
     
     private final static int I_ZONE_IN_REVOLUTIONS = 50; //100;
     
-    private boolean firstPass;
-    
     private int onTargetCount = 0;
     
     private final static int TARGET_COUNT_ONE_SECOND = 50;
@@ -46,22 +44,22 @@ public class PIDDriveRevolutionsCommand extends Command {
 	
     //the values used for motion magic (universal PID values for driving forward and back
     
-    private final static double FORWARD_TO_SHOOT_DISTANCE = 81.25;
-    private final static double FORWARD_TO_SHOOT_P = 1.5;
-    private final static double FORWARD_TO_SHOOT_I = 0.01;
-    private final static double FORWARD_TO_SHOOT_D = 60;
+//    private final static double FORWARD_TO_SHOOT_DISTANCE = 81.25;
+//    private final static double FORWARD_TO_SHOOT_P = 1.5;
+//    private final static double FORWARD_TO_SHOOT_I = 0.01;
+//    private final static double FORWARD_TO_SHOOT_D = 60;
     
 
 	
 	public PIDDriveRevolutionsCommand(double inches, boolean reverse) {
 	    requires(Robot.DRIVE_TRAIN);
 	      
-	    this.driveRevolutions = inches / ENCODER_COMPENSATION_VALUE;
+//	    this.driveRevolutions = inches / ENCODER_COMPENSATION_VALUE;
 	
 	    if (reverse) {
-	        this.driveRevolutions = -Robot.DRIVE_TRAIN.convertInchesToRevs(specificDistanceInches / ENCODER_COMPENSATION_VALUE);
+	        this.driveRevolutions = -Robot.DRIVE_TRAIN.convertInchesToRevs(inches / ENCODER_COMPENSATION_VALUE);
 	    } else {
-	        this.driveRevolutions = Robot.DRIVE_TRAIN.convertInchesToRevs(specificDistanceInches / ENCODER_COMPENSATION_VALUE);
+	        this.driveRevolutions = Robot.DRIVE_TRAIN.convertInchesToRevs(inches / ENCODER_COMPENSATION_VALUE);
 	    }
 	    this.driveP = specificDistanceP;
 	    this.driveI = specificDistanceI;
@@ -75,7 +73,6 @@ public class PIDDriveRevolutionsCommand extends Command {
 	    
 	    onTargetCount = 0;
 	    
-	    firstPass = false;
 	    Robot.DRIVE_TRAIN.resetBothEncoders();
 //	    Robot.resetNavXAngle();
         Robot.DRIVE_TRAIN.enablePositionControl();
@@ -115,11 +112,11 @@ public class PIDDriveRevolutionsCommand extends Command {
 	}
 	
 	protected void execute() {
-	    SmartDashboard.putNumber("STOP THRESHOLD:", Robot.DRIVE_TRAIN.convertRevsToInches(STOP_THRESHOLD_ADJUSTED));
-	    SmartDashboard.putNumber("Closed-Loop Error Left:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getClosedLoopError());
-        SmartDashboard.putNumber("Closed-Loop Error Right:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getClosedLoopError());
-	    SmartDashboard.putNumber("I Accum Left:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.GetIaccum());
-        SmartDashboard.putNumber("I Accum Right:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.GetIaccum());
+//	    SmartDashboard.putNumber("STOP THRESHOLD:", Robot.DRIVE_TRAIN.convertRevsToInches(STOP_THRESHOLD_ADJUSTED));
+//	    SmartDashboard.putNumber("Closed-Loop Error Left:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getClosedLoopError());
+//      SmartDashboard.putNumber("Closed-Loop Error Right:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getClosedLoopError());
+//	    SmartDashboard.putNumber("I Accum Left:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.GetIaccum());
+//      SmartDashboard.putNumber("I Accum Right:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.GetIaccum());
         
 //        IAccumDistanceTraveled = Robot.DRIVE_TRAIN.convertRevsToInches((Robot.DRIVE_TRAIN.getRightPosition() + Robot.DRIVE_TRAIN.getLeftPosition()) * 4);
 //	    

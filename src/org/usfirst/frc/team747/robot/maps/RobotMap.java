@@ -20,11 +20,6 @@ public final class RobotMap {
         RIGHT_MIDDLE(4),
         RIGHT_REAR(5);
 		
-//		LEFT_FRONT(0), //for testing with Danny bot
-//		LEFT_REAR(1),
-//		RIGHT_FRONT(2),
-//		RIGHT_REAR(3);
-
         private int value;
 
         private DriveTrain(int value) {
