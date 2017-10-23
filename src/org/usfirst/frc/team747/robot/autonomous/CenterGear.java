@@ -22,7 +22,7 @@ public class CenterGear extends CommandGroup {
         addSequential(new PIDDriveRevolutionsCommand(ValueConfig.PIDDriveDistances.FORWARD_TO_CENTER_GEAR_STEP_ONE, false));
 //        addSequential(new PauseCommand(0.5));
         
-        addSequential(new PIDDriveRevolutionsCommand(ValueConfig.PIDDriveDistances.FORWARD_TO_CENTER_GEAR_STEP_TWO, false));
+        addSequential(new PIDDriveRevolutionsCommand((ValueConfig.PIDDriveDistances.FORWARD_TO_CENTER_GEAR_STEP_TWO - 2), false));
         addSequential(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.SCORE_POSITION));
         
         addSequential(new PIDDriveRevolutionsCommand(ValueConfig.PIDDriveDistances.BACK_OFF_FROM_CENTER_GEAR, false));

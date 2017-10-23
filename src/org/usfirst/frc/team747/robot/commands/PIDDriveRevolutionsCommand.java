@@ -22,7 +22,7 @@ public class PIDDriveRevolutionsCommand extends Command {
     private static final double MIN_VOLTAGE = 1.9;
 
     //STOP_THRESHOLD_REAL was 3 inches and is now 8 inches in an attempt to cut back on time
-    private final static double STOP_THRESHOLD_REAL = .25; //3.0;
+    private final static double STOP_THRESHOLD_REAL = .5; //3.0;
     private final static double STOP_THRESHOLD_ADJUSTED = Robot.DRIVE_TRAIN.convertInchesToRevs(STOP_THRESHOLD_REAL / ENCODER_COMPENSATION_VALUE);
     
     private final static int I_ZONE_IN_REVOLUTIONS = 50; //100;
@@ -38,7 +38,7 @@ public class PIDDriveRevolutionsCommand extends Command {
 	
 	private double specificDistanceP = 1.5;
 	
-	private double specificDistanceI = 0.01;
+	private double specificDistanceI = 0.08;
 	
 	private double specificDistanceD = 60;
 	
@@ -88,8 +88,8 @@ public class PIDDriveRevolutionsCommand extends Command {
         
         Robot.DRIVE_TRAIN.talonDriveLeftPrimary.setPID(driveP, driveI, driveD);
         Robot.DRIVE_TRAIN.talonDriveRightPrimary.setPID(driveP, driveI, driveD);
-        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.setF(0.1489);
-        Robot.DRIVE_TRAIN.talonDriveRightPrimary.setF(0.1489);
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.setF(0.1);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.setF(0.1);
 
 //        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.ClearIaccum();
 //        Robot.DRIVE_TRAIN.talonDriveRightPrimary.ClearIaccum();
@@ -137,7 +137,7 @@ public class PIDDriveRevolutionsCommand extends Command {
 	@Override
 	protected boolean isFinished() {
 		double leftPosition = Robot.DRIVE_TRAIN.getLeftPosition();
-		double rightPosition = Robot.DRIVE_TRAIN.getRightPosition();
+		double rightPosition = -Robot.DRIVE_TRAIN.getRightPosition();
 		
 		if (leftPosition > (driveRevolutions - STOP_THRESHOLD_ADJUSTED) && leftPosition < (driveRevolutions + STOP_THRESHOLD_ADJUSTED) &&
 		    rightPosition > (driveRevolutions - STOP_THRESHOLD_ADJUSTED) && rightPosition < (driveRevolutions + STOP_THRESHOLD_ADJUSTED)) {
@@ -150,6 +150,8 @@ public class PIDDriveRevolutionsCommand extends Command {
 	}
 	
 	protected void end() {
+        System.out.println("LEFT Drive Distance: Inches" + Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getLeftPosition()));
+        System.out.println("RIGHT Drive Distance: Inches" + Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getRightPosition()));
 		Robot.DRIVE_TRAIN.enableVBusControl();
 		Robot.DRIVE_TRAIN.resetBothEncoders();
 //		Robot.resetNavXAngle();
