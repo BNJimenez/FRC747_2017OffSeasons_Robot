@@ -1,7 +1,10 @@
 package org.usfirst.frc.team747.robot.subsystems;
 
+import java.util.Map;
+
 import org.usfirst.frc.team747.robot.Robot;
 import org.usfirst.frc.team747.robot.maps.RobotMap;
+import org.usfirst.frc.team747.robot.maps.ValueConfig;
 import org.usfirst.frc.team747.robot.commands.GearTransferPIDRevolutionsCommand;
 import org.usfirst.frc.team747.robot.commands.SpitOutGearCommand;
 import org.usfirst.frc.team747.robot.commands.GearDoNothingCommand;
@@ -57,6 +60,17 @@ public class GearTransferSubsystem extends Subsystem {
     public void resetGearTransferEncoder() {
         this.enableVBusControl();
         talonGearTransfer.setPosition(0);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    public void setGearTransferEncoderStartPosition() {
+        this.enableVBusControl();
+        talonGearTransfer.setPosition(ValueConfig.PIDGearTransfer.START_POSITION);
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {

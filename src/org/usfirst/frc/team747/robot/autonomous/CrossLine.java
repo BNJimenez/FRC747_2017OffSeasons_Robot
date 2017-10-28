@@ -2,6 +2,8 @@ package org.usfirst.frc.team747.robot.autonomous;
 
 import org.usfirst.frc.team747.robot.Robot;
 import org.usfirst.frc.team747.robot.commands.DriveDistanceCommand;
+import org.usfirst.frc.team747.robot.commands.GearTransferEncoderReset;
+import org.usfirst.frc.team747.robot.commands.GearTransferEncoderStartPositionSet;
 import org.usfirst.frc.team747.robot.commands.GearTransferHomingCommand;
 import org.usfirst.frc.team747.robot.commands.PIDDriveRevolutionsCommand;
 import org.usfirst.frc.team747.robot.maps.ValueConfig;
@@ -18,8 +20,9 @@ public class CrossLine extends CommandGroup {
         requires(Robot.DRIVE_TRAIN);
         requires(Robot.GEAR_MECH);
         
-        addParallel(new GearTransferHomingCommand());
+//        addParallel(new GearTransferHomingCommand());
 //        addSequential(new DriveDistanceCommand(95, 0.5));
+        addParallel(new GearTransferEncoderStartPositionSet());
         addSequential(new PIDDriveRevolutionsCommand(ValueConfig.PIDDriveDistances.FORWARD_TO_CROSS_LINE, false));
 
     }
