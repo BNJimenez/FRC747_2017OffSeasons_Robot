@@ -94,7 +94,7 @@ public class GearTransferSubsystem extends Subsystem {
         double gearTransferPosition = 0;
         
         switch (mode) {
-        case Position:
+        case MotionMagic:
             gearTransferPosition = this.talonGearTransfer.getPosition();
             break;
         case PercentVbus:

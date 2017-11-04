@@ -20,7 +20,7 @@ public class GearTransferPIDRevolutionsCommand extends Command {
     private static final double MAX_VOLTAGE = 9;
     private static final double MIN_VOLTAGE = 0;
     
-    private final static double STOP_THRESHOLD_REAL_REVOLUTIONS = 0.314941406;
+    private final static double STOP_THRESHOLD_REAL_REVOLUTIONS = 0.314941406 / 2;
 
     private int onTargetCount = 0;
 
@@ -46,11 +46,11 @@ public class GearTransferPIDRevolutionsCommand extends Command {
     	
     	Robot.GEAR_MECH.talonGearTransfer.setPID(0.5, 0.0, 0.0);
         Robot.GEAR_MECH.talonGearTransfer.setF(0.0);
-    	Robot.GEAR_MECH.setGearTransferPID(gearTicks);
 
         Robot.GEAR_MECH.talonGearTransfer.configNominalOutputVoltage(MIN_VOLTAGE, -MIN_VOLTAGE);
         Robot.GEAR_MECH.talonGearTransfer.configPeakOutputVoltage(MAX_VOLTAGE, -MAX_VOLTAGE);
         Robot.GEAR_MECH.talonGearTransfer.setAllowableClosedLoopErr(0);
+        Robot.GEAR_MECH.setGearTransferPID(gearTicks);
     }
     
     // Make this return true when this Command no longer needs to run execute()

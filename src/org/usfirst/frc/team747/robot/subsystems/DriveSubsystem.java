@@ -136,7 +136,7 @@ public class DriveSubsystem extends Subsystem {
         double right = 0;
         
         switch (mode) {
-        case Position:
+        case MotionMagic:
             left = this.talonDriveLeftPrimary.getPosition();
             right = this.talonDriveRightPrimary.getPosition();
             break;
@@ -195,7 +195,7 @@ public class DriveSubsystem extends Subsystem {
     
     public void resetBothEncoders(){
         this.enableVBusControl();
-    	this.talonDriveRightPrimary.setEncPosition(0);
+    	this.talonDriveRightPrimary.setEncPosition(0); //setPosition
     	this.talonDriveLeftPrimary.setEncPosition(0);
     	try {
 			Thread.sleep(100);

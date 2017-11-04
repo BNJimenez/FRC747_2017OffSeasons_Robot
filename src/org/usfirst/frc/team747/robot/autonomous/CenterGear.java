@@ -31,7 +31,7 @@ public class CenterGear extends CommandGroup {
         
         addSequential(new PIDDriveRevolutionsCommand(ValueConfig.PIDDriveDistances.BACK_OFF_FROM_CENTER_GEAR, false));
         
-        addSequential(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.PICK_UP_POSITION));
+//        addSequential(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.PICK_UP_POSITION));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
