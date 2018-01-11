@@ -20,7 +20,6 @@ public class GearTransferGoHome extends CommandGroup {
         requires(Robot.DRIVE_TRAIN);
         requires(Robot.GEAR_MECH);
         
-//        addParallel(new GearTransferHomingCommand());
         addSequential(new GearTransferEncoderStartPositionSet());
         addSequential(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.HOME_POSITION));
         // Add Commands here:

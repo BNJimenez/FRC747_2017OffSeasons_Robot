@@ -60,26 +60,6 @@ public class Robot extends IterativeRobot {
     private Autonomous  autonomous;
     
     public static DigitalInput gearPickUpLimitSwitch = new DigitalInput(1), gearHomeLimitSwitch = new DigitalInput(2), gearScoreLimitSwitch = new DigitalInput(0);
-
-//  SendableChooser<Command> chooser = new SendableChooser<>();
-    
-    
-    
-//    private static final AHRS NAV_X = new AHRS (SPI.Port.kMXP);
-    
-//    public static double getNavXAngle() {
-//    	return NAV_X.getYaw();
-//    }
-    
-//    public static double getNavXAngleRadians() {
-//    	return Math.toRadians(getNavXAngle());
-//    }
-//    
-//    public static void resetNavXAngle() {
-//    	NAV_X.zeroYaw();
-//    }
-
-	
     
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -87,8 +67,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-//	    CameraServer.getInstance().startAutomaticCapture();
-//        resetNavXAngle();
         DRIVE_TRAIN.changeControlMode(TalonControlMode.PercentVbus);
         UsbCamera ucamera = CameraServer.getInstance().startAutomaticCapture("cam1", 0);
         ucamera.setResolution(180, 240);
@@ -127,14 +105,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
-	    //basic autonomous code, without the selector
-	    
-//	    autonomousCommand = new DriveForwardAutoCommandGroup();
-//
-//		if (autonomousCommand != null)
-//            autonomousCommand.start();
-	    
         autonomous.startMode();
         if (autonomousCommand != null) {
             autonomousCommand.start();

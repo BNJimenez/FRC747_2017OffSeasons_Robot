@@ -21,9 +21,7 @@ public class DriveDistanceCommand extends Command {
     }
 
     protected void initialize() {
-    	
-//        Robot.DRIVE_TRAIN.resetLeftEncoder();
-//        Robot.DRIVE_TRAIN.resetRightEncoder();
+   
         Robot.DRIVE_TRAIN.resetBothEncoders();
         System.out.println("RESET Should Be 0 ****** left encoder =" + Double.toString(Robot.DRIVE_TRAIN.getLeftEncoderPosition()) + 
                 "   right encoder get=" + Double.toString(Robot.DRIVE_TRAIN.getRightEncoderPosition()));
@@ -52,18 +50,6 @@ public class DriveDistanceCommand extends Command {
     }
 
     protected void end() {
-        
-//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.changeControlMode(TalonControlMode.PercentVbus);
-//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.changeControlMode(TalonControlMode.PercentVbus);
-//        Robot.DRIVE_TRAIN.talonDriveLeftSlave.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-//        Robot.DRIVE_TRAIN.talonDriveRightSlave.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-//        Robot.DRIVE_TRAIN.set(0, 0);
-        
-        /*Fix made to the code above, all four of the talons were being set to PercentVbus when the two 
-         * "Slave" talons were instead supposed to be set to Follower
-         */
-        
-        
         Robot.DRIVE_TRAIN.talonDriveLeftPrimary.changeControlMode(TalonControlMode.PercentVbus);
         Robot.DRIVE_TRAIN.talonDriveRightPrimary.changeControlMode(TalonControlMode.PercentVbus);
         Robot.DRIVE_TRAIN.talonDriveLeftMid.changeControlMode(CANTalon.TalonControlMode.Follower);
