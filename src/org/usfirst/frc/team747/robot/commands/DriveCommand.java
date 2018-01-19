@@ -5,7 +5,7 @@ import org.usfirst.frc.team747.robot.Robot;
 import org.usfirst.frc.team747.robot.maps.DriverStation;
 
 import com.ctre.CANTalon;
-
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 /**
@@ -19,7 +19,7 @@ public class DriveCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	  Robot.DRIVE_TRAIN.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	  Robot.DRIVE_TRAIN.changeControlMode(ControlMode.PercentOutput);
     }
 
     // Called repeatedly when this Command is scheduled to run
