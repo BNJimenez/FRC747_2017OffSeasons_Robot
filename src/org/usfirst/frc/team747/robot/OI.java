@@ -61,14 +61,15 @@ public class OI {
     static Preferences prefs;
     
 	public OI() {
-		BUTTON_GEAR_INTAKE.whileHeld(new SuckInGearCommand());
-		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
-        BUTTON_GEAR_PICK_UP_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.PICK_UP_POSITION)); //8.910400380625
-        BUTTON_GEAR_HOME_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.HOME_POSITION));
-        BUTTON_GEAR_SCORE_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.SCORE_POSITION));
-        BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
-        BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
+//		BUTTON_GEAR_INTAKE.whileHeld(new SuckInGearCommand());
+//		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
+//        BUTTON_GEAR_PICK_UP_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.PICK_UP_POSITION)); //8.910400380625
+//        BUTTON_GEAR_HOME_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.HOME_POSITION));
+//        BUTTON_GEAR_SCORE_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.SCORE_POSITION));
+//        BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
+//        BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
         
+      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(90));
 //        BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRevolutionsCommand(10, false));
 //        BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRevolutionsCommand(20, false));
 //        BUTTON_PID_TEST_BUTTON_THREE.toggleWhenPressed(new PIDDriveRevolutionsCommand(30, false));
@@ -100,7 +101,7 @@ public class OI {
 		SmartDashboard.putNumber("Left Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getLeftPosition()));
 		SmartDashboard.putNumber("Right Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getRightPosition()));
 //		SmartDashboard.putNumber("NavX Angle:", Robot.getNavXAngle());
-		SmartDashboard.putNumber("Gear Transfer Position:", Robot.GEAR_MECH.getGearTransferPosition());
+//		SmartDashboard.putNumber("Gear Transfer Position:", Robot.GEAR_MECH.getGearTransferPosition());
 		//SmartDashboard.putNumber("Distance to Boiler Target:", Robot.getCVDistance(Robot.VISION_TRACKING_REAR, "BOILER"));
 		//SmartDashboard.putNumber("Degrees to Boiler Target:", Robot.getCVAngle(Robot.VISION_TRACKING_REAR, "BOILER"));
 //		SmartDashboard.putNumber("Distance to Target:", Robot.getCVDistance(Robot.VISION_TRACKING_REAR, "GEAR"));

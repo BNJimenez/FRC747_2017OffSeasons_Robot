@@ -5,11 +5,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
-import org.usfirst.frc.team747.robot.commands.DriveForwardAutoCommandGroup;
-import org.usfirst.frc.team747.robot.commands.GearTransferHomingCommand;
+//import org.usfirst.frc.team747.robot.commands.DriveForwardAutoCommandGroup;
+//import org.usfirst.frc.team747.robot.commands.GearTransferHomingCommand;
 import org.usfirst.frc.team747.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team747.robot.subsystems.GearTransferSubsystem;
-import org.usfirst.frc.team747.robot.subsystems.IntakeSubsystem;
+//import org.usfirst.frc.team747.robot.subsystems.GearTransferSubsystem;
+//import org.usfirst.frc.team747.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team747.robot.vision.Target;
 import org.usfirst.frc.team747.robot.vision.VisionTracking;
 
@@ -35,7 +35,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
-import com.ctre.CANTalon.TalonControlMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.kauailabs.navx.frc.AHRS;
 
 /**
@@ -48,8 +48,8 @@ import com.kauailabs.navx.frc.AHRS;
 public class Robot extends IterativeRobot {
 	
 	public static final DriveSubsystem DRIVE_TRAIN = new DriveSubsystem();
-    public static final GearTransferSubsystem GEAR_MECH = new GearTransferSubsystem();
-    public static final IntakeSubsystem INTAKE = new IntakeSubsystem();
+//    public static final GearTransferSubsystem GEAR_MECH = new GearTransferSubsystem();
+//    public static final IntakeSubsystem INTAKE = new IntakeSubsystem();
     public static File logs, driveLog;
 	public static BufferedWriter bw, bwDrive;
 	public static FileWriter fw, fwDrive;
@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
     public static OI oi = null;
     
     private Command     autonomousCommand;
-    private Autonomous  autonomous;
+//    private Autonomous  autonomous;
     
     public static DigitalInput gearPickUpLimitSwitch = new DigitalInput(1), gearHomeLimitSwitch = new DigitalInput(2), gearScoreLimitSwitch = new DigitalInput(0);
 
@@ -65,19 +65,19 @@ public class Robot extends IterativeRobot {
     
     
     
-//    private static final AHRS NAV_X = new AHRS (SPI.Port.kMXP);
+    private static final AHRS NAV_X = new AHRS (SPI.Port.kMXP);
     
-//    public static double getNavXAngle() {
-//    	return NAV_X.getYaw();
-//    }
+    public static double getNavXAngle() {
+    	return NAV_X.getYaw();
+    }
     
-//    public static double getNavXAngleRadians() {
-//    	return Math.toRadians(getNavXAngle());
-//    }
-//    
-//    public static void resetNavXAngle() {
-//    	NAV_X.zeroYaw();
-//    }
+    public static double getNavXAngleRadians() {
+    	return Math.toRadians(getNavXAngle());
+    }
+    
+    public static void resetNavXAngle() {
+    	NAV_X.zeroYaw();
+    }
 
 	
     
@@ -89,11 +89,11 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 //	    CameraServer.getInstance().startAutomaticCapture();
 //        resetNavXAngle();
-        DRIVE_TRAIN.changeControlMode(TalonControlMode.PercentVbus);
+        DRIVE_TRAIN.changeControlMode(ControlMode.PercentOutput);
         UsbCamera ucamera = CameraServer.getInstance().startAutomaticCapture("cam1", 0);
         ucamera.setResolution(180, 240);
 
-        this.autonomous = new Autonomous();
+//        this.autonomous = new Autonomous();
         
         if (oi == null) {
             oi = new OI();
@@ -135,7 +135,7 @@ public class Robot extends IterativeRobot {
 //		if (autonomousCommand != null)
 //            autonomousCommand.start();
 	    
-        autonomous.startMode();
+//        autonomous.startMode();
         if (autonomousCommand != null) {
             autonomousCommand.start();
 	    }
