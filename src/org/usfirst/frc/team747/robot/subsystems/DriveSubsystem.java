@@ -53,8 +53,8 @@ public class DriveSubsystem extends Subsystem {
        
         this.talonDriveLeftMid.set(ControlMode.Follower, talonDriveLeftPrimary.getDeviceID());
         this.talonDriveLeftBack.set(ControlMode.Follower, talonDriveLeftPrimary.getDeviceID());
-        this.talonDriveRightMid.set(ControlMode.Follower, talonDriveLeftPrimary.getDeviceID());
-        this.talonDriveRightBack.set(ControlMode.Follower, talonDriveLeftPrimary.getDeviceID());
+        this.talonDriveRightMid.set(ControlMode.Follower, talonDriveRightPrimary.getDeviceID());
+        this.talonDriveRightBack.set(ControlMode.Follower, talonDriveRightPrimary.getDeviceID());
         
         this.talonDriveLeftPrimary.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Relative, pidIdx, timeoutMs);
 
