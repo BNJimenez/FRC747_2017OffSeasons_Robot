@@ -71,10 +71,10 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
     protected void interrupted() {
     }
 
-    @Override
-    protected double returnPIDInput() {
-        return Robot.getNavXAngle();
-    }
+    //@Override
+   // protected double returnPIDInput() {
+      //  return Robot.getNavXAngle();
+    //}
 
     @Override
     protected void usePIDOutput(double output) {
@@ -89,4 +89,10 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
         
         Robot.DRIVE_TRAIN.set(output, -output);
     }
+
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
