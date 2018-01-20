@@ -38,8 +38,6 @@ public class OI {
 	 	BUTTON_GEAR_HOMING_BUTTON
 	 	    = new JoystickButton(CONTROLLER_OPERATOR, DriverStation.GamePad.BUTTON_BACK.getValue());
 	 
-	 public static final GearDeployButtonCommand BUTTON_GEAR_DEPLOY = new GearDeployButtonCommand();
-
 	 public static final JoystickButton 
 	     BUTTON_PID_TEST_BUTTON_ONE
 	         = new JoystickButton(JOYSTICK_DRIVER_LEFT, DriverStation.Joystick.BUTTON_3.getValue()),
@@ -69,8 +67,8 @@ public class OI {
 //        BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
 //        BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
         
-      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(-90));
-      BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(90));
+      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(5));
+      BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(5));
 //      BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed();
 //        BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRevolutionsCommand(10, false));
 //        BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRevolutionsCommand(20, false));
