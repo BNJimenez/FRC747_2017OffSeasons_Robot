@@ -36,7 +36,7 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
         
         onTargetCount = 0;
         
-        Robot.resetNavXAngle();
+        //Robot.resetNavXAngle();
         
         getPIDController().setContinuous(true); //will reset back to the minimum value after reaching the max value
         getPIDController().setAbsoluteTolerance(STOP_THRESHOLD_DEGREES); //the threshold that the PID Controller abides by to consider the value as "on target"

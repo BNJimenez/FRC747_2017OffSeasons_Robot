@@ -66,7 +66,7 @@ public class Robot extends IterativeRobot {
     
     
     
-    private static final AHRS NAV_X = new AHRS (SPI.Port.kMXP);
+   /* private static final AHRS NAV_X = new AHRS (SPI.Port.kMXP);
     
     public static double getNavXAngle() {
     	return NAV_X.getYaw();
@@ -80,7 +80,7 @@ public class Robot extends IterativeRobot {
     	NAV_X.zeroYaw();
     }
 
-	
+	*/
     
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -139,7 +139,7 @@ public class Robot extends IterativeRobot {
 //        autonomous.startMode();
         if (autonomousCommand != null) {
             autonomousCommand.start();
-	    }
+        }
         
         if (oi == null) {
             oi = new OI();
