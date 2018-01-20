@@ -18,7 +18,7 @@ public class PIDDriveRotateWithVisionP2 {
 		if (tv == 0) {
 			new PIDDriveRotateCommand(27);
 		} else if(tv == 1) {
-			if(!(tv <= 3 && tv >= -3)) {
+			if(!(tv <= 14 && tv >= -14)) {
 				new PIDDriveRotateCommand(tx);
 			}
 			System.out.println("Done! Aligned with cube");
