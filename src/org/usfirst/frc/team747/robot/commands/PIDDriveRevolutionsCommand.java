@@ -111,7 +111,28 @@ public class PIDDriveRevolutionsCommand extends Command {
         Robot.DRIVE_TRAIN.setPID(driveRevolutions, -driveRevolutions);
 	}
 	
-	
+	protected void execute() {
+//	    SmartDashboard.putNumber("STOP THRESHOLD:", Robot.DRIVE_TRAIN.convertRevsToInches(STOP_THRESHOLD_ADJUSTED));
+//	    SmartDashboard.putNumber("Closed-Loop Error Left:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getClosedLoopError());
+//      SmartDashboard.putNumber("Closed-Loop Error Right:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getClosedLoopError());
+//	    SmartDashboard.putNumber("I Accum Left:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.GetIaccum());
+//      SmartDashboard.putNumber("I Accum Right:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.GetIaccum());
+        
+//        IAccumDistanceTraveled = Robot.DRIVE_TRAIN.convertRevsToInches((Robot.DRIVE_TRAIN.getRightPosition() + Robot.DRIVE_TRAIN.getLeftPosition()) * 4);
+//	    
+//	    if ((Math.abs(IAccumDistanceTraveled) - Math.abs(IAccumDistanceCounter)) >= Math.abs(I_ACCUM_RESET_BENCHMARK_IN_INCHES)) {
+//	        IAccumDistanceCounter = IAccumDistanceTraveled;
+//	        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.ClearIaccum();
+//	        Robot.DRIVE_TRAIN.talonDriveRightPrimary.ClearIaccum();
+//	    }
+//	    
+//	    if ((Math.abs(IAccumDistanceTraveled) >= Math.abs(driveRevolutions) && !firstPass)) {
+//	        firstPass = true;
+//            Robot.DRIVE_TRAIN.talonDriveLeftPrimary.ClearIaccum();
+//            Robot.DRIVE_TRAIN.talonDriveRightPrimary.ClearIaccum();
+//	    }
+	    
+	}
 	
 	@Override
 	protected boolean isFinished() {

@@ -8,7 +8,7 @@ public class CameraSpecs {
     private final double cameraVerticalAngleRad;
     private final double distanceConstantHorizontal;
     private final double distanceConstantVertical;
-    
+
     public CameraSpecs(int width, int height, double cameraHorizontalAngleRad) {
         this.imageWidth = width;
         this.imageHeight = height;
@@ -40,6 +40,5 @@ public class CameraSpecs {
     public double getDistanceConstantVertical() {
         return this.distanceConstantVertical;
     }
-    
 
 }

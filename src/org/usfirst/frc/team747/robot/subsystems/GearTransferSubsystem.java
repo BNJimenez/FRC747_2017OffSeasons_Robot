@@ -25,6 +25,9 @@ public class GearTransferSubsystem extends Subsystem {
 // 4096 for the mag encoders
     private static final double MAX_VOLTAGE = 3;
     private static final double MIN_VOLTAGE = 0;
+//	public double GEAR_TRANSFER_FAST_SPEED = 0.5;
+//	public double GEAR_TRANSFER_MODERATE_SPEED = 0.25;
+//	public double GEAR_TRANSFER_SLOW_SPEED = 0.1;
 
     public  CANTalon talonGearTransfer = new CANTalon(RobotMap.GearMech.GEAR_TRANSFER.getValue());
 
@@ -115,9 +118,11 @@ public class GearTransferSubsystem extends Subsystem {
     
     public void enablePositionControl() {
         this.changeControlMode(TalonControlMode.MotionMagic);
+//        this.talonEnableControl();
     }
 
     public void enableVBusControl() {
+//        this.talonDisableControl();
         this.changeControlMode(TalonControlMode.PercentVbus);
     }
 }
