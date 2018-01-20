@@ -43,9 +43,18 @@ public class PIDDriveRevolutionsCommand extends Command {
 	private double specificDistanceD = 60;
 	
     //the values used for motion magic (universal PID values for driving forward and back
+    
+//    private final static double FORWARD_TO_SHOOT_DISTANCE = 81.25;
+//    private final static double FORWARD_TO_SHOOT_P = 1.5;
+//    private final static double FORWARD_TO_SHOOT_I = 0.01;
+//    private final static double FORWARD_TO_SHOOT_D = 60;
+    
 
+	
 	public PIDDriveRevolutionsCommand(double inches, boolean reverse) {
 	    requires(Robot.DRIVE_TRAIN);
+	      
+//	    this.driveRevolutions = inches / ENCODER_COMPENSATION_VALUE;
 	
 	    if (reverse) {
 	        this.driveRevolutions = -Robot.DRIVE_TRAIN.convertInchesToRevs(inches / ENCODER_COMPENSATION_VALUE);
@@ -60,9 +69,12 @@ public class PIDDriveRevolutionsCommand extends Command {
 		
 	protected void initialize() {
 	    
+//	    SmartDashboard.putString("specificDistanceName:", specificDistanceName);
+	    
 	    onTargetCount = 0;
 	    
 	    Robot.DRIVE_TRAIN.resetBothEncoders();
+//	    Robot.resetNavXAngle();
         Robot.DRIVE_TRAIN.enablePositionControl();
         
         
@@ -78,11 +90,17 @@ public class PIDDriveRevolutionsCommand extends Command {
         Robot.DRIVE_TRAIN.talonDriveRightPrimary.setPID(driveP, driveI, driveD);
         Robot.DRIVE_TRAIN.talonDriveLeftPrimary.setF(0.1);
         Robot.DRIVE_TRAIN.talonDriveRightPrimary.setF(0.1);
+
+//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.ClearIaccum();
+//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.ClearIaccum();
         
         Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputVoltage(+MIN_VOLTAGE,-MIN_VOLTAGE);
         Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputVoltage(+MAX_VOLTAGE, -MAX_VOLTAGE);
         Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputVoltage(+MIN_VOLTAGE,-MIN_VOLTAGE);
         Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputVoltage(+MAX_VOLTAGE, -MAX_VOLTAGE);
+        
+//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.setCloseLoopRampRate(rampRate);
+//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.setCloseLoopRampRate(rampRate);
         
         Robot.DRIVE_TRAIN.talonDriveLeftPrimary.setAllowableClosedLoopErr(1); //was 6
         Robot.DRIVE_TRAIN.talonDriveRightPrimary.setAllowableClosedLoopErr(1); //was 6
@@ -93,9 +111,7 @@ public class PIDDriveRevolutionsCommand extends Command {
         Robot.DRIVE_TRAIN.setPID(driveRevolutions, -driveRevolutions);
 	}
 	
-	protected void execute() {
-	    
-	}
+	
 	
 	@Override
 	protected boolean isFinished() {
@@ -117,6 +133,7 @@ public class PIDDriveRevolutionsCommand extends Command {
         System.out.println("RIGHT Drive Distance: Inches" + Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getRightPosition()));
 		Robot.DRIVE_TRAIN.enableVBusControl();
 		Robot.DRIVE_TRAIN.resetBothEncoders();
+//		Robot.resetNavXAngle();
 		Robot.DRIVE_TRAIN.stop();
 	}
 	
