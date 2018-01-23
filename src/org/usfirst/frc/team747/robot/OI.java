@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 	
@@ -17,7 +18,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	//// CREATING BUTTONS
+	@SuppressWarnings("deprecation")
+	static
+	NetworkTable table = NetworkTable.getTable("limelight");
+	private static double tx;
+	
 	 public static final Joystick 
 	 //Joysticks control both climb and drive
 		JOYSTICK_DRIVER_LEFT = new Joystick(DriverStation.Controller.DRIVER_LEFT.getValue()),
@@ -58,6 +63,7 @@ public class OI {
 	 
     static Preferences prefs;
     
+	@SuppressWarnings("deprecation")
 	public OI() {
 //		BUTTON_GEAR_INTAKE.whileHeld(new SuckInGearCommand());
 //		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
@@ -67,8 +73,10 @@ public class OI {
 //        BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
 //        BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
         
-      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(5));
-      BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(5));
+		tx = table.getNumber("tx", 0);
+		int txint = (int)tx; 
+      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(txint));
+      BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(20));
 //      BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed();
 //        BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRevolutionsCommand(10, false));
 //        BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRevolutionsCommand(20, false));

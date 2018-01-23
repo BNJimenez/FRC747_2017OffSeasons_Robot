@@ -17,10 +17,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSubsystem extends Subsystem {
 	
     public TalonSRX talonDriveLeftPrimary = new TalonSRX(RobotMap.DriveTrain.LEFT_FRONT.getValue()),
-            		talonDriveLeftMid = new TalonSRX(RobotMap.DriveTrain.LEFT_MIDDLE.getValue()),
+            	//	talonDriveLeftMid = new TalonSRX(RobotMap.DriveTrain.LEFT_MIDDLE.getValue()),
             		talonDriveLeftBack = new TalonSRX(RobotMap.DriveTrain.LEFT_REAR.getValue()),
             		talonDriveRightPrimary = new TalonSRX(RobotMap.DriveTrain.RIGHT_FRONT.getValue()),
-            		talonDriveRightMid = new TalonSRX(RobotMap.DriveTrain.RIGHT_MIDDLE.getValue()),
+            	//	talonDriveRightMid = new TalonSRX(RobotMap.DriveTrain.RIGHT_MIDDLE.getValue()),
             		talonDriveRightBack = new TalonSRX(RobotMap.DriveTrain.RIGHT_REAR.getValue());
 
     private static final int pidIdx = 0;
@@ -44,16 +44,16 @@ public class DriveSubsystem extends Subsystem {
         super();
         
         this.talonDriveLeftPrimary.setInverted(true);
-        this.talonDriveLeftMid.setInverted(true);
+      //  this.talonDriveLeftMid.setInverted(true);
         this.talonDriveLeftBack.setInverted(true);
         
         this.talonDriveRightPrimary.setInverted(false);
-        this.talonDriveRightMid.setInverted(false);
+      //  this.talonDriveRightMid.setInverted(false);
         this.talonDriveRightBack.setInverted(false);
        
-        this.talonDriveLeftMid.set(ControlMode.Follower, talonDriveLeftPrimary.getDeviceID());
+      //  this.talonDriveLeftMid.set(ControlMode.Follower, talonDriveLeftPrimary.getDeviceID());
         this.talonDriveLeftBack.set(ControlMode.Follower, talonDriveLeftPrimary.getDeviceID());
-        this.talonDriveRightMid.set(ControlMode.Follower, talonDriveRightPrimary.getDeviceID());
+      //  this.talonDriveRightMid.set(ControlMode.Follower, talonDriveRightPrimary.getDeviceID());
         this.talonDriveRightBack.set(ControlMode.Follower, talonDriveRightPrimary.getDeviceID());
         
         this.talonDriveLeftPrimary.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Relative, pidIdx, timeoutMs);

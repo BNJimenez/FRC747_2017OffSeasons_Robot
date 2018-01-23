@@ -5,6 +5,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+import org.usfirst.frc.team747.robot.commands.PIDDriveRotateCommand;
+import org.usfirst.frc.team747.robot.commands.PIDDriveRotateWithVisionP2;
+import org.usfirst.frc.team747.robot.maps.DriverStation;
 //import org.usfirst.frc.team747.robot.commands.DriveForwardAutoCommandGroup;
 //import org.usfirst.frc.team747.robot.commands.GearTransferHomingCommand;
 import org.usfirst.frc.team747.robot.subsystems.DriveSubsystem;
@@ -29,6 +32,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 //import java.io.IOException;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -53,7 +57,7 @@ public class Robot extends IterativeRobot {
     public static File logs, driveLog;
 	public static BufferedWriter bw, bwDrive;
 	public static FileWriter fw, fwDrive;
-	
+	public static Joystick joystick = new Joystick(0);
     public static OI oi = null;
     
     private Command     autonomousCommand;
@@ -92,7 +96,7 @@ public class Robot extends IterativeRobot {
         DRIVE_TRAIN.changeControlMode(ControlMode.PercentOutput);
         UsbCamera ucamera = CameraServer.getInstance().startAutomaticCapture("cam1", 0);
         ucamera.setResolution(180, 240);
-
+        autonomousCommand = new PIDDriveRotateWithVisionP2();
 //        this.autonomous = new Autonomous();
         
         if (oi == null) {
@@ -127,22 +131,30 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		new PIDDriveRotateCommand(90);
+//		while(true) {
+//		try {
+//			PIDDriveRotateWithVisionP2.searchForCube();
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		}
 	    //basic autonomous code, without the selector
 	    
 //	    autonomousCommand = new DriveForwardAutoCommandGroup();
 //
-//		if (autonomousCommand != null)
-//            autonomousCommand.start();
-	    
+        if (autonomousCommand != null) autonomousCommand.start();
+
 //        autonomous.startMode();
-        if (autonomousCommand != null) {
-            autonomousCommand.start();
-	    }
+       // if (autonomousCommand != null) {
+      //      autonomousCommand.start();
+	    //}
         
-        if (oi == null) {
-            oi = new OI();
-        }
+        //if (oi == null) {
+       //    oi = new OI();
+       // }
 	}
 
 	/**
@@ -171,6 +183,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
 	}
 
 	/**
