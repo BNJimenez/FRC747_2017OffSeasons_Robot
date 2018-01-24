@@ -19,9 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 	@SuppressWarnings("deprecation")
-	static
-	NetworkTable table = NetworkTable.getTable("limelight");
-	private static double tx;
+	
 	
 	 public static final Joystick 
 	 //Joysticks control both climb and drive
@@ -72,11 +70,10 @@ public class OI {
 //        BUTTON_GEAR_SCORE_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.SCORE_POSITION));
 //        BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
 //        BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
-        
-		tx = table.getNumber("tx", 0);
-		int txint = (int)tx; 
-      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(txint));
-      BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(20));
+       
+		
+     BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(20));
+     BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(Robot.table.getNumber("tx", 0)));
 //      BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed();
 //        BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRevolutionsCommand(10, false));
 //        BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRevolutionsCommand(20, false));
