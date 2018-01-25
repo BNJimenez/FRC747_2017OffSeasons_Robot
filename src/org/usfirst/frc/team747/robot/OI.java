@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
 	@SuppressWarnings("deprecation")
 	
-	
 	 public static final Joystick 
 	 //Joysticks control both climb and drive
 		JOYSTICK_DRIVER_LEFT = new Joystick(DriverStation.Controller.DRIVER_LEFT.getValue()),
@@ -73,7 +72,7 @@ public class OI {
        
 		
      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(20));
-     BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(Robot.table.getNumber("tx", 0)));
+     BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(PIDDriveRotateWithVisionP2.searchForCube()));
 //      BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed();
 //        BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRevolutionsCommand(10, false));
 //        BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRevolutionsCommand(20, false));
@@ -93,8 +92,11 @@ public class OI {
 	                >= 0.5;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void updateOI() {
-	    SmartDashboard.putBoolean("Gear Pick Up Limit:", Robot.gearPickUpLimitSwitch.get());
+		
+		
+		SmartDashboard.putBoolean("Gear Pick Up Limit:", Robot.gearPickUpLimitSwitch.get());
 	    SmartDashboard.putBoolean("Gear Home Limit:", Robot.gearHomeLimitSwitch.get());
 	    SmartDashboard.putBoolean("Gear Score Limit:", Robot.gearScoreLimitSwitch.get());
 		SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition());
