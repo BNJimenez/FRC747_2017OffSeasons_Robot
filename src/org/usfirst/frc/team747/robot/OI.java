@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -71,8 +72,10 @@ public class OI {
 //        BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
        
 		
-     BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(20));
-     BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(PIDDriveRotateWithVisionP2.searchForCube()));
+		Command pidCommand = new PIDDriveRotateCommand(PIDDriveRotateWithVisionP2.searchForCube());
+		
+		BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(20));
+     	BUTTON_PID_TEST_BUTTON_TWO.whenPressed(pidCommand);
 //      BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed();
 //        BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRevolutionsCommand(10, false));
 //        BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRevolutionsCommand(20, false));
