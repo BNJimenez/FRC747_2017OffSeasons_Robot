@@ -12,7 +12,6 @@ public class GearTransferScoreCommandGroup extends CommandGroup {
     public GearTransferScoreCommandGroup() {
         requires(Robot.GEAR_MECH);
         
-//        addParallel(new GearTransfer);
         addSequential(new SpitOutGearCommand());
         // Add Commands here:
         // e.g. addSequential(new Command1());

@@ -20,8 +20,6 @@ public class CrossLine extends CommandGroup {
         requires(Robot.DRIVE_TRAIN);
         requires(Robot.GEAR_MECH);
         
-//        addParallel(new GearTransferHomingCommand());
-//        addSequential(new DriveDistanceCommand(95, 0.5));
         addParallel(new GearTransferEncoderStartPositionSet());
         addSequential(new PIDDriveRevolutionsCommand(ValueConfig.PIDDriveDistances.FORWARD_TO_CROSS_LINE, false));
 
