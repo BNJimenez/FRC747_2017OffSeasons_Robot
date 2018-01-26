@@ -156,6 +156,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+//		resetNavXAngle();
 		Robot.DRIVE_TRAIN.resetBothEncoders();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
