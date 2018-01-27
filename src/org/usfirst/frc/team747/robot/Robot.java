@@ -37,8 +37,9 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.kauailabs.navx.frc.AHRS;
@@ -61,7 +62,7 @@ public class Robot extends IterativeRobot {
 	public static Joystick joystick = new Joystick(0);
     public static OI oi = null;
 
-	public static NetworkTable table = NetworkTable.getTable("limelight");
+	public static NetworkTableInstance table = NetworkTableInstance.getDefault();
 	public static double tx;
     
     private Command     autonomousCommand;
@@ -187,7 +188,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		tx = table.getNumber("tx", 0);
+		tx = table.getEntry("tx").getDouble(0);
 		
 		if(joystick.getRawButton(3)) {
 			new PIDDriveRotateCommand(tx);
