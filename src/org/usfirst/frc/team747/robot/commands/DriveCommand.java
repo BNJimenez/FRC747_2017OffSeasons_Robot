@@ -13,6 +13,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveCommand extends Command {
 
+    
+    private static final double MAX_PERCENT_VOLTAGE = 1.0; //was 12 (volts previously, now the input is percent)
+    private static final double MIN_PERCENT_VOLTAGE = 0.0; //was 1.9 (volts perviously, now the input is percent)
+
+    private static final int timeoutMs = 10;
+    
     public DriveCommand() {
         requires(Robot.DRIVE_TRAIN);
     }
@@ -20,6 +26,14 @@ public class DriveCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	  Robot.DRIVE_TRAIN.changeControlMode(ControlMode.PercentOutput);
+    	  Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+    	  Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+    	  Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+    	  Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
+    	  Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+    	  Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+    	  Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+    	  Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
     }
 
     // Called repeatedly when this Command is scheduled to run

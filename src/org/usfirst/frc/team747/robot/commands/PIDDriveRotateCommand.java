@@ -22,6 +22,11 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
     
     private final static double DRIVE_SPEED_MINIMUM = 0.325;
     
+    private static final double MAX_PERCENT_VOLTAGE = 1.0;
+    private static final double MIN_PERCENT_VOLTAGE = 0.25;
+    
+    private static final int timeoutMs = 10;
+    
     public PIDDriveRotateCommand(double degreesRotate) {
 //        super(0.05, 0.0005, 0.5);
         super(0.2, 0.0, 0.375);
@@ -33,6 +38,15 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        
+      Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+      Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+      Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+      Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
+      Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+      Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+      Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+      Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
         
         onTargetCount = 0;
         

@@ -30,8 +30,8 @@ public class DriveSubsystem extends Subsystem {
 // 4096 for the mag encoders
     private static final double WHEEL_CIRCUMFERNCE = 18.85; //18.875 then was 18.85
     
-    private static final double MAX_VOLTAGE = 12;
-    private static final double MIN_VOLTAGE = 0;
+    private static final double MAX_PERCENT_VOLTAGE = 1.0;
+    private static final double MIN_PERCENT_VOLTAGE = 0.0;
   
     //Gear Distance IN REVOLUTIONS 3.7125 (needed like another inch or so; trying 3.725
     
@@ -51,6 +51,9 @@ public class DriveSubsystem extends Subsystem {
         this.talonDriveRightMid.setInverted(false);
         this.talonDriveRightBack.setInverted(false);
        
+//        this.talonDriveLeftPrimary.setSensorPhase(true);
+//        this.talonDriveRightPrimary.setSensorPhase(false);
+        
         this.talonDriveLeftMid.set(ControlMode.Follower, talonDriveLeftPrimary.getDeviceID());
         this.talonDriveLeftBack.set(ControlMode.Follower, talonDriveLeftPrimary.getDeviceID());
         this.talonDriveRightMid.set(ControlMode.Follower, talonDriveRightPrimary.getDeviceID());
@@ -67,7 +70,16 @@ public class DriveSubsystem extends Subsystem {
         this.talonDriveLeftPrimary.configMotionAcceleration(269, timeoutMs); //706
         this.talonDriveRightPrimary.configMotionCruiseVelocity(269, timeoutMs); //706
         this.talonDriveRightPrimary.configMotionAcceleration(269, timeoutMs); //706
-       
+
+        this.talonDriveLeftPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+        this.talonDriveLeftPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+        this.talonDriveLeftPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+        this.talonDriveLeftPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
+        this.talonDriveRightPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+        this.talonDriveRightPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+        this.talonDriveRightPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+        this.talonDriveRightPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
+        
     }
     
     public void initDefaultCommand() {
@@ -80,9 +92,9 @@ public class DriveSubsystem extends Subsystem {
         this.talonDriveRightPrimary.set(ControlMode.PercentOutput, right);
     }
 
-    public void setPID(double leftRevolutions, double rightRevolutions) {
-        this.talonDriveLeftPrimary.set(ControlMode.MotionMagic, leftRevolutions);
-        this.talonDriveRightPrimary.set(ControlMode.MotionMagic, rightRevolutions);
+    public void setPID(double leftTicks, double rightTicks) {
+        this.talonDriveLeftPrimary.set(ControlMode.MotionMagic, leftTicks);
+        this.talonDriveRightPrimary.set(ControlMode.MotionMagic, rightTicks);
     }
     
     public double convertRevsToInches(double revs) {
