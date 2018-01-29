@@ -63,13 +63,13 @@ public class DriveSubsystem extends Subsystem {
 
         this.talonDriveRightPrimary.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Relative, pidIdx, timeoutMs);
         
-        this.talonDriveLeftPrimary.config_kF(pidIdx, 0.1489, timeoutMs);
-        this.talonDriveRightPrimary.config_kF(pidIdx, 0.1489, timeoutMs);
+//        this.talonDriveLeftPrimary.config_kF(pidIdx, 0.1489, timeoutMs);
+//        this.talonDriveRightPrimary.config_kF(pidIdx, 0.1489, timeoutMs);
         
-        this.talonDriveLeftPrimary.configMotionCruiseVelocity(269, timeoutMs); //706
-        this.talonDriveLeftPrimary.configMotionAcceleration(269, timeoutMs); //706
-        this.talonDriveRightPrimary.configMotionCruiseVelocity(269, timeoutMs); //706
-        this.talonDriveRightPrimary.configMotionAcceleration(269, timeoutMs); //706
+        this.talonDriveLeftPrimary.configMotionCruiseVelocity(3092, timeoutMs); //706
+        this.talonDriveLeftPrimary.configMotionAcceleration(3092, timeoutMs); //706
+        this.talonDriveRightPrimary.configMotionCruiseVelocity(3092, timeoutMs); //706
+        this.talonDriveRightPrimary.configMotionAcceleration(3092, timeoutMs); //706
 
         this.talonDriveLeftPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
         this.talonDriveLeftPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
