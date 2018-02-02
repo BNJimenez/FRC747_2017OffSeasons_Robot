@@ -60,6 +60,7 @@ public class PIDDriveInchesCommand extends Command {
     
     public PIDDriveInchesCommand(double inches, boolean reverse) {
         requires(Robot.DRIVE_TRAIN);
+        
           
 //      this.driveTicks = inches / ENCODER_TICKS_PER_REVOLUTION;
     

@@ -67,18 +67,18 @@ public class OI {
 //        BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
 //        BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
         
-      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(-90));
-      BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(90));
+     // BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(-90));
+     // BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(90));
 //      BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed();
-//        BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveInchesCommand(10, false));
-//        BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(20, false));
-//        BUTTON_PID_TEST_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(30, false));
-//        BUTTON_PID_TEST_BUTTON_FOUR.toggleWhenPressed(new PIDDriveInchesCommand(40, false));
+     //  BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveInchesCommand(10, false));
+     //  BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(20, false));
+   //    BUTTON_PID_TEST_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(30, false));
+     //  BUTTON_PID_TEST_BUTTON_FOUR.toggleWhenPressed(new PIDDriveInchesCommand(40, false));
 //
-    BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new PIDDriveInchesCommand(15, false));
-    BUTTON_PID_TEST_REVERSE_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(25, false));
-    BUTTON_PID_TEST_REVERSE_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(45, false));
-    BUTTON_PID_TEST_REVERSE_BUTTON_FOUR.toggleWhenPressed(new PIDDriveInchesCommand(70, false));
+    BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new TestCommandGroup(4));
+  //  BUTTON_PID_TEST_REVERSE_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(25, false));
+  //  BUTTON_PID_TEST_REVERSE_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(45, false));
+  //  BUTTON_PID_TEST_REVERSE_BUTTON_FOUR.toggleWhenPressed(new PIDDriveInchesCommand(70, false));
 //        BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new PIDDriveInchesCommand(10, true));
 //        BUTTON_PID_TEST_REVERSE_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(20, true));
 //        BUTTON_PID_TEST_REVERSE_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(30, true));
