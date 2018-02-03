@@ -13,6 +13,9 @@ import org.usfirst.frc.team747.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team747.robot.vision.Target;
 import org.usfirst.frc.team747.robot.vision.VisionTracking;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -53,7 +56,13 @@ public class Robot extends IterativeRobot {
     public static File logs, driveLog;
 	public static BufferedWriter bw, bwDrive;
 	public static FileWriter fw, fwDrive;
-	
+	static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+	static NetworkTableEntry tx = table.getEntry("tx");
+	NetworkTableEntry ty = table.getEntry("ty");
+	NetworkTableEntry ta = table.getEntry("ta");
+	static double x = tx.getDouble(0);
+	double y = ty.getDouble(0);
+	double area = ta.getDouble(0);
     public static OI oi = null;
     
     private Command     autonomousCommand;
@@ -171,6 +180,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		tx = table.getEntry("tx");
+		ty = table.getEntry("ty");
+		ta = table.getEntry("ta");
+		 x = tx.getDouble(0);
+		 y = ty.getDouble(0);
+		 area = ta.getDouble(0);
+		System.out.println("TX: " + x);
+		System.out.println("TV: " + y);
 	}
 
 	/**

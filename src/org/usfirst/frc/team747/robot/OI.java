@@ -5,6 +5,9 @@ import org.usfirst.frc.team747.robot.commands.*;
 import org.usfirst.frc.team747.robot.maps.DriverStation;
 import org.usfirst.frc.team747.robot.maps.ValueConfig;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Preferences;
@@ -18,6 +21,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 	//// CREATING BUTTONS
+	NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+	NetworkTableEntry tx = table.getEntry("tx");
+	NetworkTableEntry ty = table.getEntry("ty");
+	NetworkTableEntry ta = table.getEntry("ta");
+	double x = tx.getDouble(0);
+	double y = ty.getDouble(0);
+	double area = ta.getDouble(0);
+
 	 public static final Joystick 
 	 //Joysticks control both climb and drive
 		JOYSTICK_DRIVER_LEFT = new Joystick(DriverStation.Controller.DRIVER_LEFT.getValue()),
@@ -75,7 +86,7 @@ public class OI {
    //    BUTTON_PID_TEST_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(30, false));
      //  BUTTON_PID_TEST_BUTTON_FOUR.toggleWhenPressed(new PIDDriveInchesCommand(40, false));
 //
-    BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new TestCommandGroup(4));
+    BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(Robot.x));
   //  BUTTON_PID_TEST_REVERSE_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(25, false));
   //  BUTTON_PID_TEST_REVERSE_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(45, false));
   //  BUTTON_PID_TEST_REVERSE_BUTTON_FOUR.toggleWhenPressed(new PIDDriveInchesCommand(70, false));
@@ -118,7 +129,8 @@ public class OI {
 	    SmartDashboard.putNumber("Left Talon Voltage Output:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getMotorOutputVoltage());
 	    SmartDashboard.putNumber("Right Talon Percent Output:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getMotorOutputPercent());
 	    SmartDashboard.putNumber("Right Talon Voltage Output:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getMotorOutputVoltage());
-		
+	    SmartDashboard.putNumber("Value of TX:",Robot.x);
+
 	}
 }
 
