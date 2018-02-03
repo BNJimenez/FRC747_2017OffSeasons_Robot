@@ -43,10 +43,10 @@ public final class ValueConfig {
     	private PIDGearTransfer() {
     		
     	}
-    	
-    	public static final double 	PICK_UP_POSITION = 9.012568279,
-                                    START_POSITION = 4.018798828,
-    								HOME_POSITION = 1.78369140625, //2.3232421875,
-    								SCORE_POSITION = 0.0;
+    	//had to multiply each value by 4096
+    	public static final int 	PICK_UP_POSITION = 36916,  //9.012568279,
+                                    START_POSITION = 16461, //4.018798828,
+    								HOME_POSITION = 7306,   //1.78369140625,  //2.3232421875,
+    								SCORE_POSITION = 0;
     }   
 }
