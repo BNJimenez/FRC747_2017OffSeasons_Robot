@@ -56,37 +56,29 @@ public class OI {
 	     BUTTON_PID_TEST_REVERSE_BUTTON_FOUR
 	         = new JoystickButton(JOYSTICK_DRIVER_RIGHT, DriverStation.Joystick.BUTTON_6.getValue());
 	 
-	 public static final GearDeployButtonCommand BUTTON_GEAR_DEPLOY = new GearDeployButtonCommand();
-	 
-	 static Preferences prefs;
+    static Preferences prefs;
     
-	public OI() { 
-		BUTTON_GEAR_INTAKE.whileHeld(new SuckInGearCommand());
-		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
-        BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderStartPositionSet());
+	public OI() {
+//		BUTTON_GEAR_INTAKE.whileHeld(new SuckInGearCommand());
+//		BUTTON_GEAR_DEPLOY.whileHeld(new SpitOutGearCommand());
 //        BUTTON_GEAR_PICK_UP_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.PICK_UP_POSITION)); //8.910400380625
 //        BUTTON_GEAR_HOME_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.HOME_POSITION));
 //        BUTTON_GEAR_SCORE_POSITION.whenPressed(new GearTransferPIDRevolutionsCommand(ValueConfig.PIDGearTransfer.SCORE_POSITION));
 //        BUTTON_GEAR_TRANSFER_ENCODER_RESET.whileHeld(new GearTransferEncoderReset());
 //        BUTTON_GEAR_HOMING_BUTTON.whileHeld(new GearTransferHomingCommand());
         
-//      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(-90));
-//      BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(90));
-//
-//      BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new PIDDriveInchesCommand(15, false));
-//      BUTTON_PID_TEST_REVERSE_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(25, false));
-//      BUTTON_PID_TEST_REVERSE_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(45, false));
-//      BUTTON_PID_TEST_REVERSE_BUTTON_FOUR.toggleWhenPressed(new PIDDriveInchesCommand(70, false));
-      
-      
-      
-      //      BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed();
+      BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(-90));
+      BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(90));
+//      BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed();
 //        BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveInchesCommand(10, false));
 //        BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(20, false));
 //        BUTTON_PID_TEST_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(30, false));
 //        BUTTON_PID_TEST_BUTTON_FOUR.toggleWhenPressed(new PIDDriveInchesCommand(40, false));
 //
-
+    BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new PIDDriveInchesCommand(15, false));
+    BUTTON_PID_TEST_REVERSE_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(25, false));
+    BUTTON_PID_TEST_REVERSE_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(45, false));
+    BUTTON_PID_TEST_REVERSE_BUTTON_FOUR.toggleWhenPressed(new PIDDriveInchesCommand(70, false));
 //        BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new PIDDriveInchesCommand(10, true));
 //        BUTTON_PID_TEST_REVERSE_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(20, true));
 //        BUTTON_PID_TEST_REVERSE_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(30, true));
@@ -101,31 +93,31 @@ public class OI {
 	}
 	
 	public void updateOI() {
-
+	    SmartDashboard.putBoolean("Gear Pick Up Limit:", Robot.gearPickUpLimitSwitch.get());
+	    SmartDashboard.putBoolean("Gear Home Limit:", Robot.gearHomeLimitSwitch.get());
+	    SmartDashboard.putBoolean("Gear Score Limit:", Robot.gearScoreLimitSwitch.get());
+		SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition());
+		SmartDashboard.putNumber("Right Encoder Position:", Robot.DRIVE_TRAIN.getRightEncoderPosition());
+		//SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition() * 4);
+		//SmartDashboard.putNumber("Right Encoder Position:", Robot.DRIVE_TRAIN.getRightEncoderPosition() * 4);
+		//SmartDashboard.putNumber("Left Position (Revolutions):", Robot.DRIVE_TRAIN.getLeftPosition() * 4);
+		//SmartDashboard.putNumber("Right Position (Revolutions):", Robot.DRIVE_TRAIN.getRightPosition() * 4);
+		SmartDashboard.putNumber("Left Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.convertTicksToRevs(Robot.DRIVE_TRAIN.getLeftPosition())));
+		SmartDashboard.putNumber("Right Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.convertTicksToRevs(Robot.DRIVE_TRAIN.getRightPosition())));
+//		SmartDashboard.putNumber("NavX Angle:", Robot.getNavXAngle());
+//		SmartDashboard.putNumber("Gear Transfer Position:", Robot.GEAR_MECH.getGearTransferPosition());
 		//SmartDashboard.putNumber("Distance to Boiler Target:", Robot.getCVDistance(Robot.VISION_TRACKING_REAR, "BOILER"));
 		//SmartDashboard.putNumber("Degrees to Boiler Target:", Robot.getCVAngle(Robot.VISION_TRACKING_REAR, "BOILER"));
 //		SmartDashboard.putNumber("Distance to Target:", Robot.getCVDistance(Robot.VISION_TRACKING_REAR, "GEAR"));
 //		SmartDashboard.putNumber("Degrees to Target:", (Robot.getCVAngle(Robot.VISION_TRACKING_REAR, "GEAR")));
-
-//	    SmartDashboard.putBoolean("Gear Pick Up Limit:", Robot.gearPickUpLimitSwitch.get());
-//	    SmartDashboard.putBoolean("Gear Home Limit:", Robot.gearHomeLimitSwitch.get());
-//	    SmartDashboard.putBoolean("Gear Score Limit:", Robot.gearScoreLimitSwitch.get());
-//	    SmartDashboard.putNumber("Left Encoder Position:", Robot.DRIVE_TRAIN.getLeftEncoderPosition());
-//	    SmartDashboard.putNumber("Right Encoder Position:", Robot.DRIVE_TRAIN.getRightEncoderPosition());
-//	    SmartDashboard.putNumber("Left Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.convertTicksToRevs(Robot.DRIVE_TRAIN.getLeftPosition())));
-//	    SmartDashboard.putNumber("Right Position (Inches):", Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.convertTicksToRevs(Robot.DRIVE_TRAIN.getRightPosition())));
-//	    SmartDashboard.putNumber("NavX Angle:", Robot.getNavXAngle());
-	    
-	    SmartDashboard.putNumber("Gear Transfer Position:", Robot.GEAR_MECH.getGearTransferPosition());
-	        
-//	    SmartDashboard.putNumber("Left Joystick:", -OI.JOYSTICK_DRIVER_LEFT.getRawAxis(DriverStation.Joystick.AXIS_Y.getValue()));
-//	    SmartDashboard.putNumber("Right Joystick:", -OI.JOYSTICK_DRIVER_RIGHT.getRawAxis(DriverStation.Joystick.AXIS_Y.getValue()));
-//	    SmartDashboard.putString("Left Talon Mode:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getControlMode().toString());
-//	    SmartDashboard.putString("Right Talon Mode:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getControlMode().toString());
-//	    SmartDashboard.putNumber("Left Talon Percent Output:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getMotorOutputPercent());
-//	    SmartDashboard.putNumber("Left Talon Voltage Output:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getMotorOutputVoltage());
-//	    SmartDashboard.putNumber("Right Talon Percent Output:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getMotorOutputPercent());
-//	    SmartDashboard.putNumber("Right Talon Voltage Output:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Left Joystick:", -OI.JOYSTICK_DRIVER_LEFT.getRawAxis(DriverStation.Joystick.AXIS_Y.getValue()));
+	    SmartDashboard.putNumber("Right Joystick:", -OI.JOYSTICK_DRIVER_RIGHT.getRawAxis(DriverStation.Joystick.AXIS_Y.getValue()));
+	    SmartDashboard.putString("Left Talon Mode:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getControlMode().toString());
+	    SmartDashboard.putString("Right Talon Mode:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getControlMode().toString());
+	    SmartDashboard.putNumber("Left Talon Percent Output:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getMotorOutputPercent());
+	    SmartDashboard.putNumber("Left Talon Voltage Output:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getMotorOutputVoltage());
+	    SmartDashboard.putNumber("Right Talon Percent Output:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getMotorOutputPercent());
+	    SmartDashboard.putNumber("Right Talon Voltage Output:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getMotorOutputVoltage());
 		
 	}
 }

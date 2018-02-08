@@ -60,6 +60,7 @@ public class DriveSubsystem extends Subsystem {
         this.talonDriveRightBack.set(ControlMode.Follower, talonDriveRightPrimary.getDeviceID());
         
         this.talonDriveLeftPrimary.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Relative, pidIdx, timeoutMs);
+
         this.talonDriveRightPrimary.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Relative, pidIdx, timeoutMs);
         
 //        this.talonDriveLeftPrimary.config_kF(pidIdx, 0.1489, timeoutMs);

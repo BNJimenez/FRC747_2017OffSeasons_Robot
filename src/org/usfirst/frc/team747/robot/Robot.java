@@ -5,12 +5,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
-import org.usfirst.frc.team747.robot.commands.GearTransferEncoderStartPositionSet;
 //import org.usfirst.frc.team747.robot.commands.DriveForwardAutoCommandGroup;
 //import org.usfirst.frc.team747.robot.commands.GearTransferHomingCommand;
 import org.usfirst.frc.team747.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team747.robot.subsystems.GearTransferSubsystem;
-import org.usfirst.frc.team747.robot.subsystems.IntakeSubsystem;
 //import org.usfirst.frc.team747.robot.subsystems.GearTransferSubsystem;
 //import org.usfirst.frc.team747.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team747.robot.vision.Target;
@@ -51,8 +48,8 @@ import com.kauailabs.navx.frc.AHRS;
 public class Robot extends IterativeRobot {
 	
 	public static final DriveSubsystem DRIVE_TRAIN = new DriveSubsystem();
-    public static final GearTransferSubsystem GEAR_MECH = new GearTransferSubsystem();
-    public static final IntakeSubsystem INTAKE = new IntakeSubsystem();
+//    public static final GearTransferSubsystem GEAR_MECH = new GearTransferSubsystem();
+//    public static final IntakeSubsystem INTAKE = new IntakeSubsystem();
     public static File logs, driveLog;
 	public static BufferedWriter bw, bwDrive;
 	public static FileWriter fw, fwDrive;
@@ -159,7 +156,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 //		resetNavXAngle();
-	    Robot.GEAR_MECH.setGearTransferEncoderStartPosition();
 		Robot.DRIVE_TRAIN.resetBothEncoders();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
