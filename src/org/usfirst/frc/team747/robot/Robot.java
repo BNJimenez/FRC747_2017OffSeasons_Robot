@@ -58,9 +58,6 @@ public class Robot extends IterativeRobot {
     
     private Command     autonomousCommand;
 //    private Autonomous  autonomous;
-    
-    public static DigitalInput gearPickUpLimitSwitch = new DigitalInput(1), gearHomeLimitSwitch = new DigitalInput(2), gearScoreLimitSwitch = new DigitalInput(0);
-
 //  SendableChooser<Command> chooser = new SendableChooser<>();
     
     
