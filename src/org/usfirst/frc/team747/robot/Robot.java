@@ -8,6 +8,7 @@ import java.io.FileWriter;
 //import org.usfirst.frc.team747.robot.commands.DriveForwardAutoCommandGroup;
 //import org.usfirst.frc.team747.robot.commands.GearTransferHomingCommand;
 import org.usfirst.frc.team747.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team747.robot.vision.LimeLightData;
 //import org.usfirst.frc.team747.robot.subsystems.GearTransferSubsystem;
 //import org.usfirst.frc.team747.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team747.robot.vision.Target;
@@ -54,6 +55,8 @@ public class Robot extends IterativeRobot {
 	public static BufferedWriter bw, bwDrive;
 	public static FileWriter fw, fwDrive;
 	
+	public static LimeLightData limeLightData = null;
+	
     public static OI oi = null;
     
     private Command     autonomousCommand;
@@ -95,6 +98,8 @@ public class Robot extends IterativeRobot {
         if (oi == null) {
             oi = new OI();
         }
+        
+        limeLightData.start();
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -160,6 +165,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
 	}
 
 	/**
@@ -177,4 +183,14 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
+	
+    public static double getLimeLightHorizontalAngle() {
+        LimeLightData limeLightData;
+        if (limeLightData != null) {
+            return limeLightData.getHorizontalAngle();
+        }
+        
+//       
+        return -1000;
+    }
 }
