@@ -14,6 +14,9 @@ import org.usfirst.frc.team747.robot.vision.LimeLightData;
 import org.usfirst.frc.team747.robot.vision.Target;
 import org.usfirst.frc.team747.robot.vision.VisionTracking;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -55,7 +58,7 @@ public class Robot extends IterativeRobot {
 	public static BufferedWriter bw, bwDrive;
 	public static FileWriter fw, fwDrive;
 	
-	public static LimeLightData limeLightData = null;
+//	public static LimeLightData limeLightData = null;
 	
     public static OI oi = null;
     
@@ -77,9 +80,17 @@ public class Robot extends IterativeRobot {
     
     public static void resetNavXAngle() {
     	NAV_X.zeroYaw();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
-	
+    public NetworkTableEntry tx;
+    public NetworkTableEntry ty;
+    public NetworkTableEntry ta;
     
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -98,8 +109,6 @@ public class Robot extends IterativeRobot {
         if (oi == null) {
             oi = new OI();
         }
-        
-        limeLightData.start();
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -165,15 +174,26 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		
 	}
 
+	public static double horizontalAngle = 0;
+	public static double verticalAngle = 0;
+	public static double area = 0;
+	
 	/**
 	 * This function is called periodically during operator control
 	 */
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+        tx = table.getEntry("tx");
+        ty = table.getEntry("ty");
+        ta = table.getEntry("ta");
+	    horizontalAngle = tx.getDouble(0);
+	    verticalAngle = ty.getDouble(0);
+	    area = ta.getDouble(0);
 	}
 
 	/**
@@ -184,13 +204,11 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 	}
 	
-    public static double getLimeLightHorizontalAngle() {
-        LimeLightData limeLightData;
-        if (limeLightData != null) {
-            return limeLightData.getHorizontalAngle();
-        }
-        
-//       
-        return -1000;
-    }
+//    public static double getLimeLightHorizontalAngle() {
+//        LimeLightData limeLightData;
+//        if (limeLightData != null) {
+//            return limeLightData.getHorizontalAngle();
+//        }
+//        return -1000;
+//    }
 }

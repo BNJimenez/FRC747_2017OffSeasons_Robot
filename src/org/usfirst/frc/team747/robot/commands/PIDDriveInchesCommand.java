@@ -93,29 +93,29 @@ public class PIDDriveInchesCommand extends Command {
          * desired location.
          */
                 
-//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.config_kP(pidIdx, specificDistanceP, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.config_kP(pidIdx, specificDistanceP, timeoutMs);
-//        
-//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.config_kI(pidIdx, specificDistanceI, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.config_kI(pidIdx, specificDistanceI, timeoutMs);
-//        
-//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.config_kD(pidIdx, specificDistanceD, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.config_kD(pidIdx, specificDistanceD, timeoutMs);
-//        
-//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.config_kF(pidIdx, specificDistanceF, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.config_kF(pidIdx, specificDistanceF, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.config_kP(pidIdx, specificDistanceP, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.config_kP(pidIdx, specificDistanceP, timeoutMs);
+        
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.config_kI(pidIdx, specificDistanceI, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.config_kI(pidIdx, specificDistanceI, timeoutMs);
+        
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.config_kD(pidIdx, specificDistanceD, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.config_kD(pidIdx, specificDistanceD, timeoutMs);
+        
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.config_kF(pidIdx, specificDistanceF, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.config_kF(pidIdx, specificDistanceF, timeoutMs);
         
 //        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.ClearIaccum();
 //        Robot.DRIVE_TRAIN.talonDriveRightPrimary.ClearIaccum();
         
-//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
-//        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
         
 //        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.setCloseLoopRampRate(rampRate);
 //        Robot.DRIVE_TRAIN.talonDriveRightPrimary.setCloseLoopRampRate(rampRate);

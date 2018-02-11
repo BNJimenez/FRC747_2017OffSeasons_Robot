@@ -27,7 +27,7 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
     
     private static final int timeoutMs = 10;
     
-    private double angleDegreesThreshold = 0;
+//    private double angleDegreesThreshold = 0;
     
     public PIDDriveRotateCommand(double degreesRotate) {
 //        super(0.05, 0.0005, 0.5);
@@ -35,11 +35,11 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
         
         this.angleToRotate = degreesRotate;
         
-        if (Math.abs(degreesRotate) <= 27) {
-            angleDegreesThreshold = 1.5;
-        }   else {
-            angleDegreesThreshold = STOP_THRESHOLD_DEGREES;
-        }
+//        if (Math.abs(degreesRotate) <= 27) {
+//            angleDegreesThreshold = 1.5;
+//        }   else {
+//            angleDegreesThreshold = STOP_THRESHOLD_DEGREES;
+//        }
             
         
         requires(Robot.DRIVE_TRAIN);
@@ -62,7 +62,7 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
         Robot.resetNavXAngle();
         
         getPIDController().setContinuous(true); //will reset back to the minimum value after reaching the max value
-        getPIDController().setAbsoluteTolerance(angleDegreesThreshold); //the threshold that the PID Controller abides by to consider the value as "on target"
+        getPIDController().setAbsoluteTolerance(STOP_THRESHOLD_DEGREES); //the threshold that the PID Controller abides by to consider the value as "on target"
         getPIDController().setInputRange(-180, 180);
         getPIDController().setOutputRange(-MAX_PERCENT_VBUS, MAX_PERCENT_VBUS);
         

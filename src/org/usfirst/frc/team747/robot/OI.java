@@ -61,7 +61,8 @@ public class OI {
 	public OI() {        
       BUTTON_PID_TEST_BUTTON_ONE.toggleWhenPressed(new PIDDriveRotateCommand(-90));
       BUTTON_PID_TEST_BUTTON_TWO.toggleWhenPressed(new PIDDriveRotateCommand(90));
-
+      BUTTON_PID_TEST_BUTTON_THREE.toggleWhenPressed(new SimpleStupidPIDDriveRotateWithVisionCommand());
+      
       BUTTON_PID_TEST_REVERSE_BUTTON_ONE.toggleWhenPressed(new PIDDriveInchesCommand(15, false));
       BUTTON_PID_TEST_REVERSE_BUTTON_TWO.toggleWhenPressed(new PIDDriveInchesCommand(25, false));
       BUTTON_PID_TEST_REVERSE_BUTTON_THREE.toggleWhenPressed(new PIDDriveInchesCommand(45, false));
@@ -97,7 +98,7 @@ public class OI {
 	    SmartDashboard.putNumber("Left Talon Voltage Output:", Robot.DRIVE_TRAIN.talonDriveLeftPrimary.getMotorOutputVoltage());
 	    SmartDashboard.putNumber("Right Talon Percent Output:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getMotorOutputPercent());
 	    SmartDashboard.putNumber("Right Talon Voltage Output:", Robot.DRIVE_TRAIN.talonDriveRightPrimary.getMotorOutputVoltage());
-		
+		SmartDashboard.putNumber("tx:", Robot.horizontalAngle);
 	}
 }
 
