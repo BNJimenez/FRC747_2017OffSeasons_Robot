@@ -31,7 +31,8 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
     
     public PIDDriveRotateCommand(double degreesRotate) {
 //        super(0.05, 0.0005, 0.5);
-        super(0.16, 0.0, 0.6);
+       // super(0.16, 0.0, 0.6);
+    	super(0.2,0.4,0.46);
         
         this.angleToRotate = degreesRotate;
         
@@ -61,10 +62,11 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
         
         Robot.resetNavXAngle();
         
-        getPIDController().setContinuous(true); //will reset back to the minimum value after reaching the max value
-        getPIDController().setAbsoluteTolerance(STOP_THRESHOLD_DEGREES); //the threshold that the PID Controller abides by to consider the value as "on target"
         getPIDController().setInputRange(-180, 180);
         getPIDController().setOutputRange(-MAX_PERCENT_VBUS, MAX_PERCENT_VBUS);
+        getPIDController().setAbsoluteTolerance(STOP_THRESHOLD_DEGREES); //the threshold that the PID Controller abides by to consider the value as "on target"
+        getPIDController().setContinuous(true); //will reset back to the minimum value after reaching the max value
+
         
         getPIDController().setSetpoint(angleToRotate);
     }
@@ -110,6 +112,6 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
 //            OUTPUT = SIGN * DRIVE_SPEED_MINIMUM;
 //        }
         
-        Robot.DRIVE_TRAIN.set(output, -output);
+        Robot.DRIVE_TRAIN.set(output*4, -output*4);
     }
 }
