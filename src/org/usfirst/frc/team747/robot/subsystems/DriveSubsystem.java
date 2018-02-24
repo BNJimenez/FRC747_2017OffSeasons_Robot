@@ -27,8 +27,10 @@ public class DriveSubsystem extends Subsystem {
     private static final int timeoutMs = 10;
     
     private static final double ENCODER_TICKS = 4096;
+    
+    private final static double GEAR_RATIO = 5.4; //5.4 : 1 means gear reduction meaning we have to drive the motor more to achieve the same distance
 // 4096 for the mag encoders
-    private static final double WHEEL_CIRCUMFERNCE = 18.85; //18.875 then was 18.85
+    private static final double WHEEL_CIRCUMFERNCE = 19.635; //18.875 then was 18.85
     
     private static final double MAX_PERCENT_VOLTAGE = 1.0;
     private static final double MIN_PERCENT_VOLTAGE = 0.0;
@@ -119,6 +121,10 @@ public class DriveSubsystem extends Subsystem {
     
     public double convertTicksToInches(double ticks) {
         return convertRevsToInches(convertTicksToRevs(ticks));
+    }
+    
+    public double applyGearRatio(double original) {
+        return original * GEAR_RATIO;
     }
     
     public void changeControlMode(ControlMode mode) {
