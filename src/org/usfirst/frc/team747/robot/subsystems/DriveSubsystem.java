@@ -68,10 +68,10 @@ public class DriveSubsystem extends Subsystem {
 //        this.talonDriveLeftPrimary.config_kF(pidIdx, 0.1489, timeoutMs);
 //        this.talonDriveRightPrimary.config_kF(pidIdx, 0.1489, timeoutMs);
         
-        this.talonDriveLeftPrimary.configMotionCruiseVelocity(2000, timeoutMs); //706
-        this.talonDriveLeftPrimary.configMotionAcceleration(2000, timeoutMs); //706
-        this.talonDriveRightPrimary.configMotionCruiseVelocity(2000, timeoutMs); //706
-        this.talonDriveRightPrimary.configMotionAcceleration(2000, timeoutMs); //706
+        this.talonDriveLeftPrimary.configMotionCruiseVelocity(15000, timeoutMs); //706
+        this.talonDriveLeftPrimary.configMotionAcceleration(15000, timeoutMs); //706
+        this.talonDriveRightPrimary.configMotionCruiseVelocity(15000, timeoutMs); //706
+        this.talonDriveRightPrimary.configMotionAcceleration(15000, timeoutMs); //706
 
         this.talonDriveLeftPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
         this.talonDriveLeftPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);

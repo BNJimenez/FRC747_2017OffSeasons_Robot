@@ -13,12 +13,12 @@ public final class RobotMap {
  
 	public enum DriveTrain {
 		
-        LEFT_FRONT(2), //for off season robot
+        LEFT_FRONT(1), //for off season robot
         //LEFT_MIDDLE(1),
-        LEFT_REAR(1),
-        RIGHT_FRONT(9),
+        LEFT_REAR(2),
+        RIGHT_FRONT(10),
         //RIGHT_MIDDLE(4),
-        RIGHT_REAR(10);
+        RIGHT_REAR(9);
 		
         private int value;
 

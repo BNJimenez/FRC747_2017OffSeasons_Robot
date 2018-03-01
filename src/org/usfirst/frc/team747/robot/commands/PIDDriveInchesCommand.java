@@ -41,13 +41,13 @@ public class PIDDriveInchesCommand extends Command {
 
     private double specificDistanceInches;
     
-    private double specificDistanceP = 1.5;
+    private double specificDistanceP = 0.4;
     
-    private double specificDistanceI = 0.08;
+    private double specificDistanceI = 0.0;
     
-    private double specificDistanceD = 60;
+    private double specificDistanceD = 0;
     
-    private double specificDistanceF = 0.1489;
+    private double specificDistanceF = 0.2031;
     
     //the values used for motion magic (universal PID values for driving forward and back
     
@@ -167,8 +167,8 @@ public class PIDDriveInchesCommand extends Command {
     }
     
     protected void end() {
-        System.out.println("LEFT Drive Distance: Inches" + Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getLeftPosition()));
-        System.out.println("RIGHT Drive Distance: Inches" + Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getRightPosition()));
+        SmartDashboard.putNumber("LEFT FINAL Drive Distance: Inches", Robot.DRIVE_TRAIN.applyGearRatio(Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getLeftPosition())));
+        SmartDashboard.putNumber("RIGHT FINAL Drive Distance: Inches", Robot.DRIVE_TRAIN.applyGearRatio(Robot.DRIVE_TRAIN.convertRevsToInches(Robot.DRIVE_TRAIN.getRightPosition())));
         Robot.DRIVE_TRAIN.enableVBusControl();
         Robot.DRIVE_TRAIN.resetBothEncoders();
 //      Robot.resetNavXAngle();
