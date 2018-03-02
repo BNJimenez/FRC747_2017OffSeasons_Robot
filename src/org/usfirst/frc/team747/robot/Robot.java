@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+import org.usfirst.frc.team747.robot.subsystems.CubeSubsystem;
 //import org.usfirst.frc.team747.robot.commands.DriveForwardAutoCommandGroup;
 //import org.usfirst.frc.team747.robot.commands.GearTransferHomingCommand;
 import org.usfirst.frc.team747.robot.subsystems.DriveSubsystem;
@@ -52,6 +53,7 @@ import com.kauailabs.navx.frc.AHRS;
 public class Robot extends IterativeRobot {
 	
 	public static final DriveSubsystem DRIVE_TRAIN = new DriveSubsystem();
+	public static final CubeSubsystem cube = new CubeSubsystem();
 //    public static final GearTransferSubsystem GEAR_MECH = new GearTransferSubsystem();
 //    public static final IntakeSubsystem INTAKE = new IntakeSubsystem();
     public static File logs, driveLog;
@@ -63,7 +65,7 @@ public class Robot extends IterativeRobot {
     public static OI oi = null;
     
     private Command     autonomousCommand;
-//    private Autonomous  autonomous;
+    private Autonomous  autonomous;
 //  SendableChooser<Command> chooser = new SendableChooser<>();
     
     
@@ -104,7 +106,7 @@ public class Robot extends IterativeRobot {
         UsbCamera ucamera = CameraServer.getInstance().startAutomaticCapture("cam1", 0);
         ucamera.setResolution(180, 240);
 
-//        this.autonomous = new Autonomous();
+        this.autonomous = new Autonomous();
         
         if (oi == null) {
             oi = new OI();
@@ -146,7 +148,7 @@ public class Robot extends IterativeRobot {
 //		if (autonomousCommand != null)
 //            autonomousCommand.start();
 	    
-//        autonomous.startMode();
+        autonomous.startMode();
         if (autonomousCommand != null) {
             autonomousCommand.start();
 	    }

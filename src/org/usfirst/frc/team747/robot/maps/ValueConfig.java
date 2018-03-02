@@ -18,7 +18,7 @@ public final class ValueConfig {
         private MeasurementConstants(){
         }
         
-        public static final double ROBOT_LENGTH = 38.5,
+        public static final double ROBOT_LENGTH = 39.25,
                                    DRIVE_DISTANCE_BUFFER = 5.0,
                                    DRIVER_WALL_TO_AUTO_LINE = 93.25,
                                    DRIVER_WALL_TO_GEAR_PEG = 110.5,

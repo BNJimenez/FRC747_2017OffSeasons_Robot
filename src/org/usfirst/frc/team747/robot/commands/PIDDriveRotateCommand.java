@@ -23,7 +23,7 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
     private final static double DRIVE_SPEED_MINIMUM = 0.325;
     
     private static final double MAX_PERCENT_VOLTAGE = 1.0;
-    private static final double MIN_PERCENT_VOLTAGE = 0.16;
+    private static final double MIN_PERCENT_VOLTAGE = 0.0;
     
     private static final int timeoutMs = 10;
     
@@ -32,7 +32,7 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
     public PIDDriveRotateCommand(double degreesRotate) {
 //        super(0.05, 0.0005, 0.5);
        // super(0.16, 0.0, 0.6);
-    	super(0.2,0.4,0.46);
+    	super(0.0028, 0.0, 0.0);
         
         this.angleToRotate = degreesRotate;
         
