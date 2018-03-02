@@ -32,7 +32,7 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
     public PIDDriveRotateCommand(double degreesRotate) {
 //        super(0.05, 0.0005, 0.5);
        // super(0.16, 0.0, 0.6);
-    	super(0.0028, 0.0, 0.0);
+    	super(0.003, 0.0, 0.0);
         
         this.angleToRotate = degreesRotate;
         
