@@ -16,7 +16,8 @@ public class Autonomous{
     
     public enum AutoMode{
         AUTOMODE_NONE,
-        AUTOMODE_RIGHT_SWITCH_FROM_CENTER
+        AUTOMODE_RIGHT_SWITCH_FROM_CENTER,
+        AUTOMODE_LEFT_SWITCH_FROM_CENTER
     }
     
     private SendableChooser autoChooser1;
@@ -29,6 +30,7 @@ public class Autonomous{
         
         autoChooser1.addDefault("No autonomous", AutoMode.AUTOMODE_NONE);
         autoChooser1.addObject("Center, Right Switch", AutoMode.AUTOMODE_RIGHT_SWITCH_FROM_CENTER);
+        autoChooser1.addObject("Center, Left Switch", AutoMode.AUTOMODE_LEFT_SWITCH_FROM_CENTER);
         SmartDashboard.putData("Auto mode", autoChooser1);
         
         
@@ -44,6 +46,9 @@ public class Autonomous{
         switch (selectedAutoMode){
             case AUTOMODE_RIGHT_SWITCH_FROM_CENTER:
                 new CenterRightSideSwitch().start();
+                break;
+            case AUTOMODE_LEFT_SWITCH_FROM_CENTER:
+                new CenterLeftSideSwitch().start();
                 break;
             case AUTOMODE_NONE:
                 //DO NOTHING

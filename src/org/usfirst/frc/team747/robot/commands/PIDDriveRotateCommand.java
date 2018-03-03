@@ -3,6 +3,7 @@ package org.usfirst.frc.team747.robot.commands;
 import org.usfirst.frc.team747.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,10 +16,10 @@ public class PIDDriveRotateCommand extends PIDCommand {
 private final static int TARGET_COUNT_ONE_SECOND = 50;
     
     //Half a second is being multiplied by the user input to achieve the desired "ON_TARGET_COUNT"
-    private final static double ON_TARGET_MINIMUM_COUNT = TARGET_COUNT_ONE_SECOND * 0.25; //times 10 is 5 seconds, times 20 is 10 seconds, etc...
+    private final static double ON_TARGET_MINIMUM_COUNT = TARGET_COUNT_ONE_SECOND * 0.1; //times 10 is 5 seconds, times 20 is 10 seconds, etc...
     
     private final static double STOP_THRESHOLD_DEGREES = 3.5;
-    private final static double MAX_PERCENT_VBUS = .5;
+    private final static double MAX_PERCENT_VBUS = 1.0;
     
     private final static double DRIVE_SPEED_MINIMUM = 0.325;
     
@@ -30,11 +31,11 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
 //    private double angleDegreesThreshold = 0;
     
     public PIDDriveRotateCommand(double degreesRotate) {
-//        super(0.05, 0.0005, 0.5);
-       // super(0.16, 0.0, 0.6);
-    	super(0.003, 0.0, 0.0);
+//    	super(0.0031, 0.0, 0.0005); //low gear values MAX_PERCENT_VBUS was 0.5 and output was multiplied by 4
+        super(0.06, 0.0, 0.12);
         
         this.angleToRotate = degreesRotate;
+        
         
 //        if (Math.abs(degreesRotate) <= 27) {
 //            angleDegreesThreshold = 1.5;
@@ -49,18 +50,18 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
     // Called just before this Command runs the first time
     protected void initialize() {
         
-      Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
-      Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
-      Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
-      Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
-      Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
-      Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
-      Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
-      Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
+        Robot.resetNavXAngle();
+        
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveLeftPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputForward(+MIN_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configNominalOutputReverse(-MIN_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputForward(+MAX_PERCENT_VOLTAGE, timeoutMs);
+        Robot.DRIVE_TRAIN.talonDriveRightPrimary.configPeakOutputReverse(-MAX_PERCENT_VOLTAGE, timeoutMs);
         
         onTargetCount = 0;
-        
-        Robot.resetNavXAngle();
         
         getPIDController().setInputRange(-180, 180);
         getPIDController().setOutputRange(-MAX_PERCENT_VBUS, MAX_PERCENT_VBUS);
@@ -77,7 +78,6 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        
         if (getPIDController().onTarget()) {
             onTargetCount++;
         } else {
@@ -89,6 +89,8 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
 
     // Called once after isFinished returns true
     protected void end() {
+        SmartDashboard.putNumber("Last Known NavX Angle:", Robot.getNavXAngle());
+//        Robot.resetNavXAngle();
     }
 
     // Called when another command which requires one or more of the same
@@ -112,6 +114,6 @@ private final static int TARGET_COUNT_ONE_SECOND = 50;
 //            OUTPUT = SIGN * DRIVE_SPEED_MINIMUM;
 //        }
         
-        Robot.DRIVE_TRAIN.set(output*4, -output*4);
+        Robot.DRIVE_TRAIN.set(output, -output);
     }
 }
